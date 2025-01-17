@@ -1,0 +1,26 @@
+<h1>Subjects</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Teachers</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @subjects.each do |subject| %>
+      <tr>
+        <td><%= subject.subject_name %></td>
+        <td>
+          <%= subject.teachers.map(&:username).join(', ') %>
+        </td>
+        <td>
+          <%= link_to 'Show', subject_path(subject) %> |
+          <%= link_to 'Edit', edit_subject_path(subject) %> |
+          <%= link_to 'Delete', subject_path(subject), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
