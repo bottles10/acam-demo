@@ -2,12 +2,11 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   connect() {
-    this.element.textContent = "Hello World!"
     const alert = document.querySelector("#alert")
-  setTimeout(() => {
+    setTimeout(() => {
       if(alert) {
-          alert.remove()
+        alert.remove()
       }
-  }, 3000)
+    }, 5000)
   }
 }
