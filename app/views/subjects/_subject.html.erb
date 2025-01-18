@@ -1,0 +1,24 @@
+<div class="overflow-x-auto">
+  <table class="w-full border-collapse border border-gray-300 bg-white shadow-md">
+    <thead>
+      <tr class="bg-gray-100 text-center">
+        <th class="px-4 py-2 font-medium text-left border border-gray-300 text-gray-700">Name</th>
+        <th class="px-4 py-2 font-medium text-left border border-gray-300 text-gray-700">Teachers</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @subjects.each do |subject| %>
+        <tr class="<%= cycle('bg-gray-50', 'bg-white') %>">
+          <td class="px-4 py-2 underline border border-gray-300 text-purple-700 hover:text-purple-500 transition duration-300"><%= link_to subject.subject_name, subject_path(subject) %></td>
+          <td class="px-4 py-2 border border-gray-300 text-gray-700">
+            <% subject.teachers.map do |teacher| %>
+              <ul class="list-disc list-inside">
+                <li class=""><%= teacher.username %></li>
+              </ul>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
