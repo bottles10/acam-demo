@@ -1,0 +1,30 @@
+<%= form_with(model: [student, report]) do |form| %>
+  <%= render partial: "layouts/shared/error_explanation", locals: { model_name: report } %>
+
+  <div class="space-y-2">
+    <div>
+      <%= form.label :subject_id, "Subject", class: "font-medium" %>
+      <%= form.select :subject_id, @subjects.collect { |subject| [subject.subject_name, subject.id] }, { include_blank: "Select a subject" }, class: "form-control bg-white rounded" %>
+    </div>
+
+    <div>
+      <%= form.label :semester_id, "Semester", class: "font-medium" %>
+      <%= form.select :semester_id, @semesters.collect { |semester| ["#{semester.year.year} - Term #{semester.term}", semester.id ] }, { include_blank: "Select a semester" }, class: "form-control bg-white rounded" %>
+    </div>
+
+    <div>
+      <%= form.label :class_score, 'Class Score (0 - 30)', class: 'font-medium' %>
+      <%= form.number_field :class_score, step: 0.1, class: 'form-control rounded' %>
+    </div>
+
+    <div>
+      <%= form.label :exam_score, 'Exam Score (0 - 70)', class: 'font-medium' %>
+      <%= form.number_field :exam_score, step: 0.1, class: 'form-control rounded' %>
+    </div>
+
+    <div>
+    <%= form.submit class: "btn-primary" %>
+    </div>
+  </div>
+
+<% end %>

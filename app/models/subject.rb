@@ -1,6 +1,8 @@
 class Subject < ApplicationRecord
   has_many :subject_teachers, dependent: :destroy
   has_many :teachers, through: :subject_teachers, source: :teacher
+  has_many :reports
+	has_many :students, through: :reports
 
   validates :subject_name, presence: true, uniqueness: { case_sensitive: false }
 

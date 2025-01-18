@@ -1,4 +1,7 @@
 class Student < ApplicationRecord
+	has_many :reports
+	has_many :subjects, through: :reports
+	
   validates :first_name, presence: true
 	validates :last_name, presence: true
 	validates :current_basic, presence: true

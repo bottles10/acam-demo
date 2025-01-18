@@ -1,4 +1,5 @@
 class Semester < ApplicationRecord
+  has_many :reports, dependent: :destroy
 
   validates :year, presence: true
   validates :term, presence: true, inclusion: { in: [1, 2, 3, 4] }

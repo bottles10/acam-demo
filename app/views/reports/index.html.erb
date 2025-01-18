@@ -1,0 +1,81 @@
+<div class="container mx-auto px-4 py-8">
+  <div class="flex items-center justify-center space-x-5">
+    <div class="w-20 h-20 bg-gray-200 rounded-full text-center">school logo</div>
+    <div class="">
+      <P class="text-3xl font-bold"><%= "Hello World Montessori" %></P>
+      <h2 class="text-xl font-bold text-center"><%= "a tripple foobar" %></h2>
+      <div class="flex item-center justify-center space-x-3">
+        <p><span class="font-medium">Phone number:</span> 0000000000</p>
+        <p><span class="font-medium">Email:</span> foo@bar.com</p>
+        <p><span class="font-medium">Box Address:</span> P.0.Box 000</p>
+      </div>
+    </div>
+  </div>
+  <hr class="my-4">
+
+  <div class="mb-4 flex items-center justify-between">
+    <div>
+      <p><span class="font-medium">Name of student:</span> <%= @student.fullname %></p>
+      <p><span class="font-medium">Student ID:</span> <%= "0000" %></p>
+      <p><span class="font-medium">Number on Roll:</span> <%= "00" %></p>
+    </div>
+
+    <div>
+      <p class="font-medium text-purple-800"><%= current_term(@student) %></p>
+      <p><span class="font-medium">Next term Begins:</span> <%= "date" %></p>
+    </div>
+  </div>
+  
+
+  <div class="flex justify-between items-center mb-4">
+    <a href="<%= new_student_report_path(@student) %>" class="btn-primary hover:bg-blue-500 hover:scale-105 transition-all duration-300">Add New Report</a>
+  </div>
+
+  <div class="overflow-x-auto">
+    <table class="table-auto w-full bg-white shadow-md rounded-lg">
+      <thead>
+        <tr class="bg-gray-500 text-white">
+          <th class="px-4 py-2">Subject</th>
+          <th class="px-4 py-2">Class Score</th>
+          <th class="px-4 py-2">Exam Score</th>
+          <th class="px-4 py-2">Total</th>
+          <th class="px-4 py-2">Grade</th>
+          <th class="px-4 py-2">Remarks</th>
+          <th class="bg-red-600 px-4 py-2">Actions</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <% @reports.each do |report| %>
+          <tr class="even:bg-gray-200 hover:bg-gray-100">
+            <td class="border px-4 py-2 text-center text-gray-800"><%= report.subject.name %></td>
+            <td class="border px-4 py-2 text-center text-gray-600"><%= report.class_score %></td>
+            <td class="border px-4 py-2 text-center text-gray-600"><%= report.exam_score %></td>
+            <td class="border px-4 py-2 text-center text-gray-800 font-medium"><%= report.total %></td>
+            <td class="border px-4 py-2 text-center text-gray-800 font-medium"><%= report.grade %></td>
+            <td class="border px-4 py-2 text-center text-gray-600"><%= report.remarks %></td>
+            <td class="flex items-center justify-between border px-4 py-2 text-center">
+              <a href="<%= edit_student_report_path(@student, report) %>" class="inline-block text-blue-500 hover:text-blue-700 font-medium">Edit</a> |
+              <%= button_to 'Destroy', student_report_path(@student, report), method: :delete, data: { turbo_confirm: 'Are you sure?' }, class: 'inline-block text-red-500 hover:text-red-700 font-medium' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="7" class="border border-gray-400 px-4 py-2 text-center text-gray-800"></td>
+      </tr>
+      <tr>
+        <td class="font-bold border border-gray-400 px-4 py-2 text-center text-gray-800">Grand Total</td>
+        <td class="border border-gray-400 px-4 py-2 text-center text-gray-800">288</td>
+      </tr>
+      <tr>
+        <td class="font-bold border border-gray-400 px-4 py-2 text-center text-gray-800">Average</td>
+        <td class="border border-gray-400 px-4 py-2 text-center text-gray-800">72</td>
+      </tr>
+    </tfoot>
+    </table>
+  </div>
+
+  
+</div>
