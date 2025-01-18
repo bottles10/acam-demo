@@ -1,14 +1,14 @@
   <table class="table-auto w-full border-collapse border border-gray-300">
     <thead>
-      <tr class="bg-gray-100">
-        <th class="border border-gray-300 px-4 py-2 text-left text-gray-700 font-semibold">Subject</th>
-        <th class="border border-gray-300 px-4 py-2 text-left text-gray-700 font-semibold">Teachers</th>
+      <tr class="bg-gray-200">
+        <th class="px-4 py-2 text-left border border-gray-300 text-gray-700 font-semibold">Subject</th>
+        <th class="px-4 py-2 text-left border border-gray-300 text-gray-700 font-semibold">Teachers</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td class="border border-gray-300 px-4 py-2 text-gray-600"><%= @subject.subject_name %></td>
-        <td class="border border-gray-300 px-4 py-2 text-gray-600">
+        <td class="px-4 py-2 font-medium border border-gray-300 text-gray-600"><%= @subject.subject_name %></td>
+        <td class="px-4 py-2 border border-gray-300 text-gray-600">
           <% @subject.teachers.map do |teacher| %>
             <ul class="list-disc list-inside">
               <li><%= teacher.username %></li>
