@@ -48,7 +48,7 @@
       <tbody>
         <% @reports.each do |report| %>
           <tr class="even:bg-gray-200 hover:bg-gray-100">
-            <td class="border px-4 py-2 text-center text-gray-800"><%= report.subject.name %></td>
+            <td class="border px-4 py-2 text-center text-gray-800"><%= report.subject.subject_name %></td>
             <td class="border px-4 py-2 text-center text-gray-600"><%= report.class_score %></td>
             <td class="border px-4 py-2 text-center text-gray-600"><%= report.exam_score %></td>
             <td class="border px-4 py-2 text-center text-gray-800 font-medium"><%= report.total %></td>
