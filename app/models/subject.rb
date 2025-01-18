@@ -22,6 +22,12 @@ class Subject < ApplicationRecord
     subject
   end
 
+   # Friendly url
+   def to_param
+    "#{id}-#{subject_name.downcase.to_s[0...100]}".parameterize
+  end
+
+
   private
 
   def normalize_subject_name

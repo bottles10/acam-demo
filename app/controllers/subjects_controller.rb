@@ -5,7 +5,8 @@ class SubjectsController < ApplicationController
     @subjects = Subject.all
   end
 
-  def show; end
+  def show
+  end
 
   def new
     @subject = Subject.new
@@ -18,7 +19,7 @@ class SubjectsController < ApplicationController
 
     respond_to do |format|
       if @subject.persisted?
-        format.html { redirect_to @subject, notice: "Subject successfully created !" }
+        format.html { redirect_to @subject, notice: "Subject successfully created!" }
       else
         @teachers = User.all_teachers
         format.html { render :new, status: :unprocessable_entity }

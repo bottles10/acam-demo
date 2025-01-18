@@ -1,0 +1,22 @@
+<%= form_with(model: semester) do |form| %>
+	<%= render partial: "layouts/shared/error_explanation",
+	 						locals: { model_name: semester } %>
+
+  <div class="space-y-2">
+		<div>
+			<p class="text-xs text-yellow-800">Date is intentional, Day & Month are automatically selected. <span class="font-bold font-mono">Ignore!</span></p>
+				<%= form.label :year, class: "font-medium" %>
+				<%= form.date_field :year, value: Date.new(Date.today.year), class: 'form-control cursor-not-allowed'%>
+		</div>
+
+		<div>
+				<%= form.label :term, class: "font-medium" %>
+				<%= form.select :term, [['Term 1', 1], ['Term 2', 2], ['Term 3', 3], ['Term 4', 4]], { include_blank: "Select the Term" }, class: "form-control" %>
+		</div>
+
+		<div>
+				<%= form.submit class: "btn-primary" %>
+		</div>
+	</div>
+
+<% end %>
