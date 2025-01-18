@@ -1,0 +1,23 @@
+<% if notice %>
+    <div id="alert" class="p-4 mb-4 text-center font-medium bg-blue-100 text-blue-500 rounded" role="alert">
+        <%= notice %>
+    </div>
+<% end %>
+
+<% if alert %>
+    <div id="alert" class="p-4 mb-4 text-center font-medium bg-yellow-100 text-yellow-500 rounded" role="alert">
+        <%= alert %>
+    </div>
+<% end %>
+
+<script>
+    let alert = document.querySelector('#alert')
+
+    if(alert) {
+        setTimeout(() => {
+            alert.remove()
+        }, 7000)
+    }
+
+</script>
+

@@ -1,8 +1,8 @@
 class User < ApplicationRecord
-  has_many :subject_teachers, foreign_key: :teacher_id
+  has_many :subject_teachers, foreign_key: :teacher_id, dependent: :destroy
   has_many :subjects, through: :subject_teachers
   
-  before_save { username.downcase! }
+  before_save :humanize_username
 	before_create :set_default_role
 
 	after_create :assign_admin_if_needed
@@ -17,6 +17,10 @@ class User < ApplicationRecord
 	scope :all_teachers, -> { where(role: :teacher) }
 
 	private
+
+	def humanize_username
+		self.username = username.humanize
+	end
 
 	def set_default_role
 		self.role ||= :teacher

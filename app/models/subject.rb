@@ -6,15 +6,25 @@ class Subject < ApplicationRecord
 
   before_save :normalize_subject_name
 
+  # Method to find or create a subject and add teachers to its associations
+  def self.find_or_create_with_teachers(attributes)
+    subject_name = attributes[:subject_name].strip.humanize
+    teacher_ids = attributes[:teacher_ids].reject(&:blank?).map(&:to_i)
 
-  def to_param
-    "#{id}-#{subject_name.downcase.to_s[0...100]}".parameterize
+    # Find or initialize the subject
+    subject = Subject.find_or_initialize_by(subject_name: subject_name)
+
+    # Add the new teachers to the existing ones without replacing
+    subject.teacher_ids |= teacher_ids
+
+    # Save the subject and return it
+    subject.save
+    subject
   end
-
 
   private
 
   def normalize_subject_name
-    self.subject_name = subject_name.strip.titleize
+    self.subject_name = subject_name.strip.humanize
   end
 end
