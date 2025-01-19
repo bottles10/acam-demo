@@ -1,0 +1,24 @@
+<div>
+	<%= link_to student_path(student) do %>
+		<div class="relative border border-gray-200 shadow-lg hover:shadow-xl 
+							hover:scale-105  rounded-lg transition duration-300">
+		<!-- fun badge styling -->	
+		<div class="absolute top-0 right-0 p-1 text-xs text-white
+						bg-blue-600 transform -translate-y-3 
+						translate-x-3 rounded"><%= student.current_basic.humanize %>
+		</div>
+		
+			<div class="py-6 px-3 flex flex-col h-full">
+					<h2 class="mb-4 text-xl text-center font-semibold text-gray-800">
+						<%= student.fullname %>
+					</h2>
+
+					<%= link_to "View report", student_reports_path(student), 
+											class: " block -mb-4 py-1 text-sm text-center 
+														font-medium border-2 border-l-pink-500 rounded" %>
+			</div>
+		</div>
+	<% end %>
+</div>
+
+

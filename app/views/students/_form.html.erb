@@ -1,0 +1,32 @@
+<%= form_with(model: student) do |form| %>
+  <%= render partial: "layouts/shared/error_explanation", 
+              locals: { model_name: student } %>
+ 
+ <div class="space-y-2">
+   <div>
+     <%= form.label :first_name, class: "font-medium" %>
+     <%= form.text_field :first_name, class: "form-control w-full focus:border-blue-500 rounded" %>
+   </div>
+   
+   <div>
+     <%= form.label :middle_name, class: "font-medium" %>
+     <%= form.text_field :middle_name, class: "form-control w-full focus:border-blue-500 rounded" %>
+   </div>
+
+   <div>
+     <%= form.label :last_name, class: "font-medium" %>
+     <%= form.text_field :last_name, class: "form-control w-full focus:border-blue-500 rounded" %>
+   </div>
+
+   <div>
+     <%= form.label :current_basic, "Class", class: "font-medium" %>
+     <%= form.select :current_basic, Student.current_basics.keys.map{ |w| [w.humanize, w] }, 
+                     { include_blank: "Select basic level" },
+                     class: "form-control w-full rounded appearance-none" %>
+   </div>
+
+   <div class="!my-4">
+     <%= form.submit class: "btn-primary hover:bg-blue-500 transition duration-300" %>
+   </div>
+ </div>
+<% end %>

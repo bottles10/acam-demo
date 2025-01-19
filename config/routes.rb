@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-  get "reports/index"
   resources :students do
-    resources :reports, except: %i[ show ]
+    resources :reports
   end
   resources :subjects
   resources :semesters, except: %i[ edit update ]

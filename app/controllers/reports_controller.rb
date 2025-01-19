@@ -1,6 +1,6 @@
 class ReportsController < ApplicationController
   before_action :set_report, only: %i[ edit update destroy ]
-  before_action :set_student, only: %i[ index new create edit]
+  before_action :set_student, only: %i[ index new create edit update]
 
   def index
     @reports = @student.reports.includes(:subject, :semester)
@@ -36,6 +36,8 @@ class ReportsController < ApplicationController
       if @report.update(report_params)
         format.html { redirect_to student_reports_path(@report.student), notice: "Report successfully updated!" }
       else
+        @subjects = Subject.all
+        @semesters = Semester.all
         format.html { render :edit, status: :unprocessable_entity }
       end
     end
