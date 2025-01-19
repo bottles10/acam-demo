@@ -11,6 +11,7 @@ class Report < ApplicationRecord
 
 	before_save :cal_total_score_grade_and_remarks
 
+  scope :by_semester, ->(semester) { where(semester_id: semester) }
 
   private
 
