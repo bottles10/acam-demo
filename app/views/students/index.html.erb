@@ -1,6 +1,13 @@
-<div class="mb-8 flex items-center justify-between">
-  <div class="text-xs font-bold">View from: <span class="text-purple-800"> basic 6</span></div>
-  <%= link_to "Add Student", new_student_path, class: "btn-primary" %>
+<div class="mb-12 flex items-center justify-between">
+  <%= form_with url: students_path, method: :get, local: true, class: "flex items-center space-x-4" do |f| %>
+    <%= f.label :current_basic, "Filter by class:", class: "font-medium text-purple-800" %>
+    <%= f.select :current_basic, Student.current_basics.map{ |key, value| [key.humanize, value] }, 
+                                    { include_blank: "Select basic level &darr;".html_safe },
+                                    class: "form-control rounded appearance-none" %>
+    <%= f.submit "Filter", class: "btn-primary" %>
+  <% end %>
+
+  <%= link_to "Add Student", new_student_path, class: "btn-primary hover:bg-blue-500 hover:scale-105 transtion-all duration-300" %>
 </div>
 
   <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">

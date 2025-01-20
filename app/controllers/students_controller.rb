@@ -2,7 +2,11 @@ class StudentsController < ApplicationController
   before_action :set_student, only: %i[ show edit update destroy ]
 
 	def index
-		@students = Student.all
+		if params[:current_basic].present?
+			@students = Student.where(current_basic: params[:current_basic])
+		else
+			@students = Student.all
+		end
 	end
 
 	def show
