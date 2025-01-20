@@ -1,3 +1,12 @@
+<!-- Filter by semester form -->
+<div>
+      <%= form_with url: student_reports_path(@student), method: :get, local: true, class: "flex space-x-4" do |f| %>
+        <%= f.label :semester_id, "Filter by Semester:", class: "font-medium" %>
+        <%= f.select :semester_id, Semester.all.collect { |semester| ["#{semester.year.year} - Term #{semester.term}", semester.id ] }, { include_blank: "Select a semester" }, class: "form-control bg-white rounded" %>
+        <%= f.submit "Filter", class: "btn-primary" %>
+      <% end %>
+</div>
+
 <div class="container mx-auto px-4 py-8">
   <div class="flex items-center justify-center space-x-5">
     <div class="w-20 h-20 bg-gray-200 rounded-full text-center">school logo</div>
@@ -21,13 +30,13 @@
     </div>
 
     <div>
-      <p class="font-medium text-purple-800"><%= current_term(@student) %></p>
+      <p class="font-medium text-purple-800"><%= current_term(@student, @semester) %></p>
       <p><span class="font-medium">Next term Begins:</span> <%= "date" %></p>
     </div>
   </div>
   
 
-  <div class="flex justify-between items-center mb-4">
+  <div class="mb-4 flex justify-between items-center">
     <a href="<%= new_student_report_path(@student) %>" class="btn-primary hover:bg-blue-500 hover:scale-105 transition-all duration-300">Add New Report</a>
   </div>
 
@@ -67,11 +76,13 @@
       </tr>
       <tr>
         <td class="font-bold border border-gray-400 px-4 py-2 text-center text-gray-800">Grand Total</td>
-        <td class="border border-gray-400 px-4 py-2 text-center text-gray-800">288</td>
+        <td class="border border-gray-400 px-4 py-2 text-center text-gray-800"><%= @reports.sum(:total).ceil %></td>
       </tr>
       <tr>
         <td class="font-bold border border-gray-400 px-4 py-2 text-center text-gray-800">Average</td>
-        <td class="border border-gray-400 px-4 py-2 text-center text-gray-800">72</td>
+        <td class="border border-gray-400 px-4 py-2 text-center text-gray-800">
+          <%= @reports.any? ? (@reports.sum(:total).to_f / @reports.count).ceil : 0 %>
+        </td>
       </tr>
     </tfoot>
     </table>
