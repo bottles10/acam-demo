@@ -10,9 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_19_003924) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_20_060225) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "assessments", force: :cascade do |t|
+    t.integer "attendance_present"
+    t.integer "attendance_total"
+    t.string "attitude"
+    t.string "conduct"
+    t.string "interest"
+    t.string "class_teacher_remarks"
+    t.string "form_master"
+    t.bigint "student_id", null: false
+    t.bigint "semester_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["semester_id"], name: "index_assessments_on_semester_id"
+    t.index ["student_id"], name: "index_assessments_on_student_id"
+  end
 
   create_table "reports", force: :cascade do |t|
     t.decimal "class_score"
@@ -72,6 +88,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_19_003924) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "assessments", "semesters"
+  add_foreign_key "assessments", "students"
   add_foreign_key "reports", "semesters"
   add_foreign_key "reports", "students"
   add_foreign_key "reports", "subjects"

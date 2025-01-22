@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "new_assessment_form" do %>
+	  <%= render partial: "semesters/assessments/form", locals: { student: @student, assessment: @assessment, semester: @semester, redirect: true } %>
+<% end %>

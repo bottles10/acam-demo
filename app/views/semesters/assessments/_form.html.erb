@@ -1,0 +1,64 @@
+<%= turbo_frame_tag "new_assessment_form", target: "_top" do %> 
+
+<%= form_with(model: [student, semester, assessment], url: semester_assessments_path(semester), method: :post) do |form| %>
+  <%= render partial: "layouts/shared/error_explanation", locals: { model_name: assessment } %>
+
+  <%= form.hidden_field :student_id, value: student.id %>
+
+  <div class="mt-12 space-y-2">
+    <div class="flex items-center space-x-4">
+      <div>
+        <%= form.label :attendance_present, "Attendance", class: "font-medium inline-block" %>
+        <%= form.number_field :attendance_present, step: 1, class: "form-control rounded inline-block" %>
+      </div>
+
+        <p>Out of</p>
+
+      <div>
+        <%= form.label :attendance_total, "Attendance Total", class: "font-medium sr-only" %>
+        <%= form.number_field :attendance_total, step: 1, class: "form-control rounded" %>
+      </div>
+    </div>
+
+    <div class="flex items-center space-x-4">
+      <div>
+        <%= form.label :attitude, class: "font-medium" %>
+        <%= form.text_field :attitude, class: "form-control rounded" %>
+      </div>
+
+      <div>
+        <%= form.label :conduct, class: "font-medium" %>
+        <%= form.text_field :conduct, class: "form-control rounded" %>
+      </div>
+    </div>
+   
+    
+
+    
+
+    <div>
+      <%= form.label :interest, class: "font-medium" %>
+      <%= form.text_field :interest, class: "form-control rounded" %>
+    </div>
+
+    <div>
+      <%= form.label :class_teacher_remarks, "Class Teacher's Remarks", class: "font-medium" %>
+      <%= form.text_field :class_teacher_remarks, class: "form-control rounded" %>
+    </div>
+
+    <div>
+      <%= form.label :form_master, "Form Master", class: "font-medium" %>
+      <%= form.text_field :form_master, class: "form-control rounded" %>
+    </div>
+
+    <div>
+      <%# form.label :master_signature, "Master's Signature", class: "font-medium" %>
+      <%# form.file_field :master_signature %>
+    </div>
+
+    <div>
+      <%= form.submit "Submit assessment", class: "btn-primary" %>
+    </div>
+  </div>
+<% end %>
+<% end %>

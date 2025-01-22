@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  attendace: MyString
+  attitude: MyString
+  conduct: MyString
+  interest: MyString
+  class_teacher_remarks: MyString
+  form_master: MyString
+  report: one
+  assessment: one
+
+two:
+  attendace: MyString
+  attitude: MyString
+  conduct: MyString
+  interest: MyString
+  class_teacher_remarks: MyString
+  form_master: MyString
+  report: two
+  assessment: two

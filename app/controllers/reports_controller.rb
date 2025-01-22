@@ -2,10 +2,11 @@ class ReportsController < ApplicationController
   before_action :set_report, only: %i[ edit update destroy ]
   before_action :set_student, only: %i[ index new create edit update]
 
- def index
-  @semester = params[:semester_id].present? ? Semester.find(params[:semester_id]) : Semester.order(year: :desc, term: :desc).first
-  @reports = @semester ? @student.reports.by_semester(@semester.id).includes(:subject) : @student.reports.includes(:subject)
-end
+  def index
+    @semester = params[:semester_id].present? ? Semester.find(params[:semester_id]) : Semester.order(year: :desc, term: :desc).first
+    @reports = @semester ? @student.reports.by_semester(@semester.id).includes(:subject) : @student.reports.includes(:subject)
+    @new_assessment = @semester.assessments.find_or_initialize_by(student: @student) || @semester.assessments.build(student: @student)
+  end
 
 
   def new

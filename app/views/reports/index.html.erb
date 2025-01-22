@@ -45,9 +45,9 @@
       <thead>
         <tr class="bg-gray-500 text-white">
           <th class="px-4 py-2">Subject</th>
-          <th class="px-4 py-2">Class Score</th>
-          <th class="px-4 py-2">Exam Score</th>
-          <th class="px-4 py-2">Total</th>
+          <th class="px-4 py-2">Class Score (30%)</th>
+          <th class="px-4 py-2">Exam Score (70%)</th>
+          <th class="px-4 py-2">Total (100%)</th>
           <th class="px-4 py-2">Grade</th>
           <th class="px-4 py-2">Remarks</th>
           <th class="bg-red-600 px-4 py-2">Actions</th>
@@ -88,5 +88,27 @@
     </table>
   </div>
 
+  <hr class="my-4">
+  
+	<div class="my-12">
+	  <% if @new_assessment.persisted? %>
+    	<p clas="font-medium"> Attendance: <span class="text-sm font-normal text-purple-800 underline underline-offset-2 decoration-dashed"><%= @new_assessment.attendance_present %></span> Out Of <span class="text-sm font-normal text-purple-800 underline underline-offset-2 decoration-dashed"><%= @new_assessment.attendance_total %></span></p>
+      <p clas="font-medium"> Attitude:	<span class="text-sm font-normal text-purple-800 underline underline-offset-2 decoration-dashed"><%= @new_assessment.attitude %></p>
+      <p clas="font-medium"> Conduct:	<span class="text-sm font-normal text-purple-800 underline underline-offset-2 decoration-dashed"><%= @new_assessment.conduct %></p>
+      <p clas="font-medium"> Interest:	<span class="text-sm font-normal text-purple-800 underline underline-offset-2 decoration-dashed"><%= @new_assessment.interest %></p>
+      <p clas="font-medium"> Class Teacher's Remarks:	<span class="text-sm font-normal text-purple-800 underline underline-offset-2 decoration-dashed"><%= @new_assessment.class_teacher_remarks %></p>
+      <p clas="font-medium"> Form Master:	<span class="text-sm font-normal text-purple-800 underline underline-offset-2 decoration-dashed"><%= @new_assessment.form_master %></p>
+      <p clas="font-medium"> Head's Signature:	<%= "" %></p>
+    <% else %>
+      <p>No Assessment record submitted for <span class="font-medium text-purple-800"><%= @student.fullname %></span>
+		<% end %>
+	</div>
+
+  <hr class="my-4">
+
+  <div id="<%= dom_id(@new_assessment) %>"> 
+    <h3 class="text-3xl font-semibold text-center">Assessment</h3>
+	  <%= render partial: "semesters/assessments/form", locals: { student: @student, assessment: @new_assessment, semester: @semester } %>
+  </div>
   
 </div>
