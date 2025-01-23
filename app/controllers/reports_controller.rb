@@ -64,6 +64,6 @@ class ReportsController < ApplicationController
   end
 
   def report_params
-    params.expect(report: [ :class_score, :exam_score, :subject_id, :student_id, :semester_id] )
+    params.expect(report: [ :exam_score, :subject_id, :student_id, :semester_id, :class_scores ] )
   end
 end

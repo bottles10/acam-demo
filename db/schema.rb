@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_23_042530) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_23_063057) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -32,7 +32,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_23_042530) do
   end
 
   create_table "reports", force: :cascade do |t|
-    t.decimal "class_score"
     t.decimal "exam_score"
     t.decimal "total"
     t.string "grade"
@@ -42,6 +41,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_23_042530) do
     t.bigint "semester_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "class_scores"
     t.index ["grade"], name: "index_reports_on_grade"
     t.index ["semester_id"], name: "index_reports_on_semester_id"
     t.index ["student_id"], name: "index_reports_on_student_id"
