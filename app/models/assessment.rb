@@ -3,9 +3,9 @@ class Assessment < ApplicationRecord
   belongs_to :semester
 
   validates :attendance_present, :attendance_total, presence: true, numericality: { only_integer: true, allow_nil: true }
-  # validates :attitude, :conduct, :interest, presence: true, length: { maximum: 40 }
-  # validates :class_teacher_remarks, presence: true,  length: { maximum: 40 }
-  # validates :semester_id, uniqueness: { scope: [ :student_id ], message: "for this student already have assessment record."}
+  validates :attitude, :conduct, :interest, presence: true, length: { maximum: 40 }
+  validates :class_teacher_remarks, presence: true,  length: { maximum: 40 }
+  validates :semester_id, uniqueness: { scope: [ :student_id ], message: "for this student already have assessment record."}
 
   enum :next_basic_level, { basic_one: 0, basic_two: 1, 
 											basic_three: 2, basic_four: 3,
