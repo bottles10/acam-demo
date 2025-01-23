@@ -8,14 +8,25 @@ module Semesters
 
       respond_to do |format|
   
-      if @assessment.save
-        format.html { redirect_to student_reports_path(@student, semester_id: @semester.id), notice: "Assessment created successfully!" }
-      else
-        format.turbo_stream    
+        if @assessment.save
+          format.html { redirect_to student_reports_path(@student, semester_id: @semester.id), notice: "Assessment created successfully!" }
+        else
+          format.turbo_stream    
+        end
       end
     end
+
+    def destroy
+      @semester = Semester.find(params.expect(:semester_id))
+      @student = Student.find(params.expect(:student_id))
+      @assessment = Assessment.find(params.expect(:id))
+      @assessment.destroy!
+
+      respond_to do |format|
+        format.html { redirect_to student_reports_path(@student, semester_id: @semester.id), notice: "Assessment destroyed successfully!" }
+        format.json { head :no_content }
+      end
     end
-  
     private
   
     def set_student_and_semester     
@@ -26,7 +37,7 @@ module Semesters
   
     def assessment_params
       params.expect(assessment: [ :attendance_present, :attendance_total, :attitude, 
-                                  :conduct, :interest, :class_teacher_remarks, :form_master ])
+                                  :conduct, :interest, :class_teacher_remarks, :form_master, :next_basic_level ])
     end
   end
 end

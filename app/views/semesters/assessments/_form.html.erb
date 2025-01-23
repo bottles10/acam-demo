@@ -47,6 +47,13 @@
     </div>
 
     <div>
+     <%= form.label :next_basic_level, "Promoted to:", class: "font-medium text-purple-800" %>
+     <%= form.select :next_basic_level, Assessment.next_basic_levels.keys.map{ |w| [w.humanize, w] }, 
+                     { include_blank: "Select basic level" },
+                     class: "block p-2 border-2 border-purple-500 bg-white outline-none rounded appearance-none" %>
+   </div>
+
+    <div>
       <%= form.label :form_master, "Form Master", class: "font-medium" %>
       <%= form.text_field :form_master, class: "form-control rounded" %>
     </div>

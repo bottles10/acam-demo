@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     resources :reports
   end
   resources :semesters, except: %i[ edit update ] do
-    resources :assessments, only: %i[ new create ], module: :semesters
+    resources :assessments, only: %i[ new create destroy ], module: :semesters
   end
   resources :subjects
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

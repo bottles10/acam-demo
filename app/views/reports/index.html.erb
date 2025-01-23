@@ -32,6 +32,7 @@
     <div>
       <p class="font-medium text-purple-800"><%= current_term(@student, @semester) %></p>
       <p><span class="font-medium">Next term Begins:</span> <%= "date" %></p>
+      <p><span class="font-medium text-green-500">Promoted To:</span> <%= @new_assessment.next_basic_level&.titleize if @new_assessment.persisted? %></p>
     </div>
   </div>
   
@@ -99,6 +100,11 @@
       <p clas="font-medium"> Class Teacher's Remarks:	<span class="text-sm font-normal text-purple-800 underline underline-offset-2 decoration-dashed"><%= @new_assessment.class_teacher_remarks %></p>
       <p clas="font-medium"> Form Master:	<span class="text-sm font-normal text-purple-800 underline underline-offset-2 decoration-dashed"><%= @new_assessment.form_master %></p>
       <p clas="font-medium"> Head's Signature:	<%= "" %></p>
+
+      <%= button_to "Delete", semester_assessment_path(@new_assessment.semester_id, @new_assessment), method: :delete,
+                            params: { student_id: @new_assessment.student_id }, 
+														data: {turbo_confirm: "Student's assessment will be deleted for this semester!"},
+														class: "btn-danger" %>
     <% else %>
       <p>No Assessment record submitted for <span class="font-medium text-purple-800"><%= @student.fullname %></span>
 		<% end %>

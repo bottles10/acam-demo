@@ -2,9 +2,6 @@ class Report < ApplicationRecord
   belongs_to :student
   belongs_to :subject
   belongs_to :semester
-	has_one :assessment, dependent: :destroy
-
-	accepts_nested_attributes_for :assessment
 
   validates :class_score, presence: true,  numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 30 }, allow_nil: false
 	validates :exam_score, presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 70 }, allow_nil: false
