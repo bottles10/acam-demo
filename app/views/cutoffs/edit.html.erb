@@ -1,0 +1,7 @@
+<div class="flex flex-col items-center justify-center">
+  <h1 class="mb-12 text-4xl font-bold">Edit cutoff percentage</h1>
+  <div>
+    <%= render "form", cutoff: @cutoff %>
+  </div>
+  <%= link_to "&larr; Back".html_safe, @cutoff, class: "mt-4 btn-cancel" %>
+</div>

@@ -1,0 +1,10 @@
+<tr class="even:bg-gray-200 hover:bg-gray-100">
+  <td class="border px-4 py-2 text-center text-gray-800"><%= cutoff.current_basic %></td>
+  <td class="border px-4 py-2 text-center text-gray-800"><%= cutoff.class_percentage %>%</td>
+  <td class="border px-4 py-2 text-center text-gray-800"><%= cutoff.exam_percentage %>%</td>
+  <td class="flex items-center justify-around border px-2 py-2 text-center">
+    <%= link_to 'Show', cutoff, class: "btn-cancel border-purple-500" %> |
+    <%= link_to 'Edit', edit_cutoff_path(cutoff), class: "btn-cancel border-purple-500" %> |
+    <%= button_to 'Delete', cutoff, method: :delete, data: { turbo_confirm: 'Are you sure?' }, class: "btn-cancel border-purple-500" %>
+  </td>
+</tr>

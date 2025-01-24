@@ -1,0 +1,24 @@
+<%= form_with(model: cutoff) do |form| %>
+  <%= render partial: "layouts/shared/error_explanation", locals: { model_name: cutoff } %>
+  <div class="space-y-2">
+    <div>
+      <%= form.label :current_basic, "Class" %>
+      <%= form.select :current_basic, Student.current_basics.map { |key, value| [key.humanize, value] }, { include_blank: "Select class" }, class: "form-control" %>
+    </div>
+
+    <div>
+      <%= form.label :class_percentage %>
+      <%= form.number_field :class_percentage, class: "form-control"%>
+    </div>
+    
+    <div>
+      <%= form.label :exam_percentage %>
+      <%= form.number_field :exam_percentage, class: "form-control"%>
+    </div>
+
+    <div>
+      <%= form.submit "Submit cutoff percentage", class: "btn-primary" %>
+    </div>
+  </div>
+
+<% end %>
