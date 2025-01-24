@@ -17,6 +17,7 @@ class ReportsController < ApplicationController
 
   def create
     @report = @student.reports.new(report_params)
+    authorize @report
 
     respond_to do |format|
       if @report.save
@@ -32,9 +33,11 @@ class ReportsController < ApplicationController
   def edit
     @subjects = Subject.all
     @semesters = Semester.all
+    authorize @report
   end
 
   def update
+    authorize @report
     respond_to do |format|
       if @report.update(report_params)
         format.html { redirect_to student_reports_path(@report.student), notice: "Report successfully updated!" }
@@ -47,6 +50,7 @@ class ReportsController < ApplicationController
   end
 
   def destroy
+    authorize @report
     @report.destroy!
     redirect_to student_reports_path(@report.student), notice: "Report destroyed successfully!"
   end
