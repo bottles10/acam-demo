@@ -3,7 +3,7 @@
   <div class="space-y-2">
     <div>
       <%= form.label :current_basic, "Class" %>
-      <%= form.select :current_basic, Student.current_basics.map { |key, value| [key.humanize, value] }, { include_blank: "Select class" }, class: "form-control" %>
+      <%= form.select :current_basic, Student.current_basics.keys.map { |key| [key.humanize, key] }, { include_blank: "Select class" }, class: "form-control" %>
     </div>
 
     <div>

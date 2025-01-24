@@ -32,7 +32,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_24_043101) do
   end
 
   create_table "cutoffs", force: :cascade do |t|
-    t.integer "current_basic"
+    t.string "current_basic"
     t.integer "class_percentage"
     t.integer "exam_percentage"
     t.datetime "created_at", null: false
