@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_23_063057) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_23_095011) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -34,7 +34,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_23_063057) do
   create_table "reports", force: :cascade do |t|
     t.decimal "exam_score"
     t.decimal "total"
-    t.string "grade"
+    t.integer "grade"
     t.string "remarks"
     t.bigint "student_id", null: false
     t.bigint "subject_id", null: false

@@ -33,27 +33,28 @@ class Report < ApplicationRecord
   end
 
   def cal_total_score_grade_and_remarks
-    self.total = (thirty_percent_of_class_score + exam_score).round
-
-    self.grade = case total.ceil
-                 when 90..100 then 1
-                 when 80..89 then 2
-                 when 70..79 then 3
-                 when 60..69 then 4
-                 when 55..59 then 5
-                 when 50..54 then 6
-                 when 40..49 then 7
-                 when 35..39 then 8
-                 else 9
-                 end
-
-    self.remarks = case grade
-                   when 1 then 'Excellent'
-                   when 2 then 'Very Good'
-                   when 3 then 'Good'
-                   when 4..6 then 'Credit'
-                   when 7..8 then 'Pass'
-                   else 'Fail'
-                   end
-  end
+		self.total = (thirty_percent_of_class_score + exam_score).round
+	
+		self.grade = case total.ceil
+								 when 90..100 then 1
+								 when 80..89 then 2
+								 when 70..79 then 3
+								 when 60..69 then 4
+								 when 55..59 then 5
+								 when 50..54 then 6
+								 when 40..49 then 7
+								 when 35..39 then 8
+								 else 9
+								 end
+	
+		self.remarks = case grade
+									 when 1 then 'Excellent'
+									 when 2 then 'Very Good'
+									 when 3 then 'Good'
+									 when 4..6 then 'Credit'
+									 when 7..8 then 'Pass'
+									 else 'Fail'
+									 end
+	end
+	
 end
