@@ -10,11 +10,11 @@ class Report < ApplicationRecord
                                        message: "already has a report for this student and semester" }
 
   before_save :convert_class_scores_to_string
+  before_save :adjust_exam_score
   before_save :cal_total_score_grade_and_remarks
 
   scope :by_semester, ->(semester) { where(semester_id: semester) }
 
-  private
 
   # Convert the class_scores string input into an array of decimals
   def parsed_class_scores
@@ -22,18 +22,36 @@ class Report < ApplicationRecord
     sanitized_scores.split(',').map(&:strip).map(&:to_f)
   end
 
+  def class_score_percentage_cutoff_result
+    puts "******* Cuttof percentage: #{student.cutoff_percentage}"
+    cutoff_percentages = student.cutoff_percentage
+    class_percentage = cutoff_percentages[:class_cutoff_percentage].to_f / 100
+    puts "class percentage in decimals: #{class_percentage}"
+    total_class_score = parsed_class_scores.sum
+    puts "total class score: #{total_class_score}"
+    (total_class_score * class_percentage).round(2)
+  end
+
+  def exam_score_percentage_cutoff_result
+    cutoff_percentages = student.cutoff_percentage
+    exam_percentage = cutoff_percentages[:exam_cutoff_percentage].to_f / 100
+    (exam_score * exam_percentage)
+  end
+
   def convert_class_scores_to_string
-    self.class_scores = parsed_class_scores.sum.to_s
+    self.class_scores = class_score_percentage_cutoff_result.to_s
   end
 
-  def thirty_percent_of_class_score
-    total_class_score = parsed_class_scores.sum.round(2)
-
-    total_class_score * 0.3
+  def adjust_exam_score
+    self.exam_score = exam_score_percentage_cutoff_result
   end
+
+
+  private
+
 
   def cal_total_score_grade_and_remarks
-		self.total = (thirty_percent_of_class_score + exam_score).round
+		self.total = (class_scores.to_f + exam_score).round
 	
 		self.grade = case total.ceil
 								 when 90..100 then 1

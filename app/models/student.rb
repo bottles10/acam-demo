@@ -16,4 +16,13 @@ class Student < ApplicationRecord
 	def fullname
 		"#{self.first_name + " " + self.last_name}"
 	end
+
+	 # Fetch the cutoff percentage for the student's current_basic
+	 def cutoff_percentage
+    cutoff = Cutoff.find_by(current_basic: self.current_basic_before_type_cast)
+    {
+      class_cutoff_percentage: cutoff&.class_percentage || 0,
+      exam_cutoff_percentage: cutoff&.exam_percentage || 0
+    }
+  end
 end

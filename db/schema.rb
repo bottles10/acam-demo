@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_23_095011) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_24_043101) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -29,6 +29,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_23_095011) do
     t.integer "next_basic_level"
     t.index ["semester_id"], name: "index_assessments_on_semester_id"
     t.index ["student_id"], name: "index_assessments_on_student_id"
+  end
+
+  create_table "cutoffs", force: :cascade do |t|
+    t.integer "current_basic"
+    t.integer "class_percentage"
+    t.integer "exam_percentage"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "reports", force: :cascade do |t|
