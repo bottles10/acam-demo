@@ -1,5 +1,6 @@
 class CutoffsController < ApplicationController
   before_action :set_cutoff, only: %i[ show edit update destroy ]
+  before_action :only_admin_authorized, except: %i[ index show ]
 
   # GET /offcuts or /offcuts.json
   def index

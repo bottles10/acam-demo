@@ -1,5 +1,6 @@
 class SubjectsController < ApplicationController
   before_action :set_subject, only: %i[show edit update destroy]
+  before_action :only_admin_authorized, except: %i[ index show ]
 
   def index
     @subjects = Subject.all

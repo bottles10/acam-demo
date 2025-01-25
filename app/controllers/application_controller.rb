@@ -13,4 +13,11 @@ class ApplicationController < ActionController::Base
     flash[:alert] = 'You are not assigned to this subject. Cannot perform any action.'
     redirect_to(request.referer || root_path)
   end
+
+  def only_admin_authorized
+    unless current_user.admin?
+      flash[:alert] =  'Only administrators authorized!'
+      redirect_to(request.referer || root_path) and return 
+    end
+  end
 end

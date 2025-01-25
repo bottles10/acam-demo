@@ -20,8 +20,8 @@
           <li class="font-medium hover:font-bold transition hover:scale-105 duration-300"><%= link_to "Subjects", subjects_path %></li>
           <li class="font-medium hover:font-bold transition hover:scale-105 duration-300"><%= link_to "Semesters", semesters_path %></li>
           <% if user_signed_in? %>
-            <li class="font-medium hover:font-bold transition hover:scale-105 duration-300"><%= link_to current_user.username.upcase, edit_user_registration_path %></li>
-            <li class="font-medium hover:font-bold transition hover:scale-105 duration-300"><%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete} %></li>
+            <li class="font-medium hover:font-bold text-purple-800 transition hover:scale-105 duration-300"><%= link_to current_user.username.upcase, edit_user_registration_path %></li>
+            <li class="font-medium hover:font-bold text-red-700 transition hover:scale-105 duration-300"><%= link_to image_tag("power.svg", width: "30"), destroy_user_session_path, data: {turbo_method: :delete} %></li>
           <% else %>
             <li class="font-medium hover:font-bold transition hover:scale-105 duration-300"><%= link_to "Sign up", new_user_registration_path %></li>
             <li class="font-medium hover:font-bold transition hover:scale-105 duration-300"><%= link_to "Login", new_user_session_path %></li>
