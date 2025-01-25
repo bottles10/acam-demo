@@ -4,13 +4,22 @@ class HomeController < ApplicationController
     @total_students = Student.all.count
     @total_subjects = Subject.all.count
     @current_semester = find_current_semester(Semester)
+    @reports = Report.includes(:student, :subject).all.limit(10)
+
+    subject_performance
   end
 
   def subject_performance
-    # Group reports by subject_id and calculate the average total score for each subject
-    @subject_scores = Report.group(:subject_id)
+    # Aggregate reports across all semesters and calculate the average total score for each subject
+    @subject_scores = Report.joins(:semester)
+                            .group(:subject_id, :semester_id)
                             .average(:total)
-                            .transform_keys { |subject_id| Subject.find(subject_id).name }  # Get subject names
+                            .map do |(subject_id, semester_id), avg_score|
+                              subject_name = Subject.find(subject_id).subject_name
+                              semester_term = Semester.find(semester_id).term
+                              # Construct the label as "Subject - Term X"
+                              ["#{subject_name} - Term #{semester_term}", avg_score]
+                            end.to_h  # This is where the `.to_h` should come after the `map` block
 
     # Define the threshold for passing
     passing_threshold = 50.0  # 50% is passing
