@@ -9,18 +9,18 @@
     <div class="flex items-center space-x-4">
       <div>
         <%= form.label :attendance_present, "Attendance", class: "font-medium inline-block" %>
-        <%= form.number_field :attendance_present, step: 1, class: "form-control rounded inline-block" %>
+        <%= form.number_field :attendance_present, step: 1, class: "form-control rounded inline-block w-2/5" %>
       </div>
 
         <p>Out of</p>
 
       <div>
         <%= form.label :attendance_total, "Attendance Total", class: "font-medium sr-only" %>
-        <%= form.number_field :attendance_total, step: 1, class: "form-control rounded" %>
+        <%= form.number_field :attendance_total, step: 1, class: "form-control rounded inline-block w-2/5" %>
       </div>
     </div>
 
-    <div class="flex items-center space-x-4">
+    <div class="block md:flex items-center space-y-2 md:space-y-0 md:space-x-4">
       <div>
         <%= form.label :attitude, class: "font-medium" %>
         <%= form.text_field :attitude, class: "form-control rounded" %>

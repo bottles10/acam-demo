@@ -46,8 +46,8 @@
       <thead>
         <tr class="bg-gray-500 text-white">
           <th class="px-4 py-2">Subject</th>
-          <th class="px-4 py-2">Class Score (30%)</th>
-          <th class="px-4 py-2">Exam Score (70%)</th>
+          <th class="px-4 py-2">Class Score (<%= @student.cutoff_percentage[:class_cutoff_percentage] %>%)</th>
+          <th class="px-4 py-2">Exam Score (<%= @student.cutoff_percentage[:exam_cutoff_percentage] %>%)</th>
           <th class="px-4 py-2">Total (100%)</th>
           <th class="px-4 py-2">Grade</th>
           <th class="px-4 py-2">Remarks</th>
@@ -111,12 +111,13 @@
 	</div>
 
   <hr class="my-4">
-
+  <div class="overflow-x-auto">
   <% unless @new_assessment.persisted? %>
     <div id="<%= dom_id(@new_assessment) %>"> 
       <h3 class="text-3xl font-semibold text-center">Assessment</h3>
       <%= render partial: "semesters/assessments/form", locals: { student: @student, assessment: @new_assessment, semester: @semester } %>
     </div>
   <% end %>
+  </div>
   
 </div>

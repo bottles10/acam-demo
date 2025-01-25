@@ -1,18 +1,19 @@
-<div class="flex flex-col items-center justify-center">
-  <h1 class="mb-12 text-4xl font-bold"><%= @cutoff.current_basic.humanize %> cutoff Percentage</h1>
-  <table class="table-auto w-full bg-white shadow-md rounded-lg">
-    <thead>
-      <tr class="bg-gray-500 text-white">
-        <th clas="px-4 py-2">Current Basic</th>
-        <th clas="px-4 py-2">Class Percentage</th>
-        <th clas="px-4 py-2">Exam Percentage</th>
-        <th clas="px-4 py-2">Actions</th>
-      </tr>
-    </thead>
+<h1 class="mb-12 text-lg md:text-4xl text-center font-bold"><%= @cutoff.current_basic.humanize %> grade scale</h1>
+  
+  <div class="overflow-x-auto">
+    <table class="table-auto w-full bg-white shadow-md rounded-lg">
+      <thead>
+        <tr class="bg-gray-500 text-white">
+          <th clas="px-4 py-2">Current Basic</th>
+          <th clas="px-4 py-2">Class Percentage</th>
+          <th clas="px-4 py-2">Exam Percentage</th>
+          <th clas="px-4 py-2">Actions</th>
+        </tr>
+      </thead>
 
-    <tbody>
-      <%= render "cutoff", cutoff: @cutoff %>
-    </tbody>
-  </table>
+      <tbody>
+        <%= render "cutoff", cutoff: @cutoff %>
+      </tbody>
+    </table>
+  </div>
   <%= link_to "&larr; Back".html_safe, cutoffs_path, class: "mt-4 btn-cancel" %>
-</div>
