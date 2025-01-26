@@ -3,7 +3,7 @@
   <div class="p-3 flex flex-wrap items-center justify-between">
     <h1 class="ml-5 text-xl font-bold"><%= link_to "ACAM REPORT", root_path %></h1>
     
-    <label for="menu-toggle" class="block md:hidden cursor-pointer">
+    <label for="menu-toggle" class="block lg:hidden cursor-pointer">
       <bread-crumb class="flex space-x-1 transform -rotate-90">
         <div class="h-4 border-l-2"></div>
         <div class="h-3 border-l-2"></div>
@@ -12,8 +12,8 @@
     </label>
     <input type="checkbox" id="menu-toggle" class="hidden peer/breadcrumb">
 
-      <nav class="hidden peer-checked/breadcrumb:block md:mr-5 md:flex w-full md:w-auto">
-        <ul class="w-40 md:w-auto my-4 md:my-0 p-3 md:p-0 md:flex items-center text-sm text-center bg-gray-950 md:bg-stone-100 text-white md:text-gray-800 border border-gray-900 md:border-0 rounded md:rounded-none space-y-8 md:space-y-0 md:space-x-8">
+      <nav class="hidden peer-checked/breadcrumb:block lg:mr-5 lg:flex w-full lg:w-auto">
+        <ul class="w-40 lg:w-auto my-4 lg:my-0 p-3 lg:p-0 lg:flex items-center text-sm text-center bg-gray-950 lg:bg-stone-100 text-white lg:text-gray-800 border border-gray-900 lg:border-0 rounded lg:rounded-none space-y-8 lg:space-y-0 lg:space-x-8">
           <li class="font-medium hover:font-bold transition hover:scale-105 duration-300"><%= link_to "Students", students_path %></li>
           <li class="font-medium hover:font-bold transition hover:scale-105 duration-300"><%= link_to "Grade Scales", cutoffs_path %></li>
           <li class="font-medium hover:font-bold transition hover:scale-105 duration-300"><a href="#">Teachers</a></li>
@@ -21,7 +21,9 @@
           <li class="font-medium hover:font-bold transition hover:scale-105 duration-300"><%= link_to "Semesters", semesters_path %></li>
           <% if user_signed_in? %>
             <li class="font-medium hover:font-bold text-purple-800 transition hover:scale-105 duration-300"><%= link_to current_user.username.upcase, edit_user_registration_path %></li>
-            <li class="font-medium hover:font-bold text-red-700 transition hover:scale-105 duration-300"><%= link_to image_tag("power.svg", width: "30"), destroy_user_session_path, data: {turbo_method: :delete} %></li>
+            <li class="flex flex-col items-center justify-center  transition hover:scale-105 duration-300">
+              <%= link_to image_tag("power.svg", width: "30"), destroy_user_session_path, data: {turbo_method: :delete} %>
+            </li>
           <% else %>
             <li class="font-medium hover:font-bold transition hover:scale-105 duration-300"><%= link_to "Sign up", new_user_registration_path %></li>
             <li class="font-medium hover:font-bold transition hover:scale-105 duration-300"><%= link_to "Login", new_user_session_path %></li>

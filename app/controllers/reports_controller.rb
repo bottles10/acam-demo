@@ -21,7 +21,7 @@ class ReportsController < ApplicationController
 
     respond_to do |format|
       if @report.save
-        format.html { redirect_to student_reports_path(@student), notice: 'Report created succesffully! ' }
+        format.html { redirect_to student_reports_url(params[:student_id]) + "?semester_id=#{params[:report][:semester_id]}", notice: 'Report created successfully!' }
       else
         @subjects = Subject.all
         @semesters = Semester.all
@@ -40,7 +40,7 @@ class ReportsController < ApplicationController
     authorize @report
     respond_to do |format|
       if @report.update(report_params)
-        format.html { redirect_to student_reports_path(@report.student), notice: "Report successfully updated!" }
+        format.html { redirect_to student_reports_url(params[:student_id]) + "?semester_id=#{params[:report][:semester_id]}", notice: 'Report updated successfully!' }
       else
         @subjects = Subject.all
         @semesters = Semester.all
@@ -52,7 +52,11 @@ class ReportsController < ApplicationController
   def destroy
     authorize @report
     @report.destroy!
-    redirect_to student_reports_path(@report.student), notice: "Report destroyed successfully!"
+    
+    respond_to do |format|
+      format.html { redirect_to student_reports_url(params[:student_id]) + "?semester_id=#{:semester_id}", notice: 'Report destroyed successfully!' }
+      format.json { head :no_content }
+    end
   end
 
 

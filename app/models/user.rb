@@ -24,7 +24,7 @@ class User < ApplicationRecord
 	private
 
 	def humanize_username
-		self.username = username.humanize
+		self.username = username.downcase
 	end
 
 	def set_default_role
