@@ -1,4 +1,5 @@
 class Semester < ApplicationRecord
+	belongs_to :school, default: -> { Current.school }
   has_many :reports, dependent: :destroy
 	has_many :assessments, dependent: :destroy
 

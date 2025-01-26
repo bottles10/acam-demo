@@ -1,13 +1,18 @@
 Rails.application.routes.draw do
-  devise_for :users
-  resources :students do
-    resources :reports
+  constraints(SubdomainConstraint) do
+    scope module: 'schools' do
+      root 'dashboard#index', as: :school_root
+    end
+    devise_for :users
+    resources :students do
+      resources :reports
+    end
+    resources :semesters, except: %i[ edit update ] do
+      resources :assessments, only: %i[ new create destroy ], module: :semesters
+    end
+    resources :subjects
+    resources :cutoffs
   end
-  resources :semesters, except: %i[ edit update ] do
-    resources :assessments, only: %i[ new create destroy ], module: :semesters
-  end
-  resources :subjects
-  resources :cutoffs
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -19,5 +24,7 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  root "home#dashboard"
+  # root "home#dashboard"
+  root 'schools#new' # Root for the main app
+  resources :schools, only: [:new, :create]
 end

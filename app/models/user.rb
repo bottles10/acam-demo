@@ -3,7 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-				 
+	
+	belongs_to :school, default: -> { Current.school }
   has_many :subject_teachers, foreign_key: :teacher_id, dependent: :destroy
   has_many :subjects, through: :subject_teachers
   

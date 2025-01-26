@@ -1,4 +1,5 @@
 class SemestersController < ApplicationController
+  before_action :authenticate_user!
   before_action :only_admin_authorized, except: %i[ index show ]
   def index
     @semesters = Semester.semester_year_grouped.group_by(&:year)

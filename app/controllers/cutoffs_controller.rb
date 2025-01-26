@@ -1,4 +1,5 @@
 class CutoffsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_cutoff, only: %i[ show edit update destroy ]
   before_action :only_admin_authorized, except: %i[ index show ]
 

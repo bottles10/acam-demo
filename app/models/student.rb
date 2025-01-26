@@ -1,4 +1,5 @@
 class Student < ApplicationRecord
+	belongs_to :school, default: -> { Current.school }
 	has_many :reports
 	has_many :subjects, through: :reports
 	

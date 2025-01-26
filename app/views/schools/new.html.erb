@@ -1,0 +1,149 @@
+<!-- Navigation Bar -->
+<header class="bg-white shadow-md fixed top-0 left-0 right-0 z-10">
+  <div class="max-w-7xl mx-auto px-6 py-6">
+    <div class="flex justify-between items-center">
+      <!-- Logo -->
+      <a href="/" class="text-3xl font-extrabold text-indigo-600 hover:text-indigo-700 transition duration-300">ACAM</a>
+      
+      <!-- Navigation Links -->
+      <nav class="space-x-8 hidden md:flex">
+        <a href="#home" class="text-lg text-gray-800 font-medium hover:text-indigo-600 transition duration-300">Home</a>
+        <a href="#features" class="text-lg text-gray-800 font-medium hover:text-indigo-600 transition duration-300">Features</a>
+        <a href="#pricing" class="text-lg text-gray-800 font-medium hover:text-indigo-600 transition duration-300">Pricing</a>
+        <a href="#about" class="text-lg text-gray-800 font-medium hover:text-indigo-600 transition duration-300">About Us</a>
+        <a href="#contact" class="text-lg text-gray-800 font-medium hover:text-indigo-600 transition duration-300">Contact</a>
+      </nav>
+      
+      <!-- Mobile Navigation Toggle (Hamburger) -->
+      <div class="md:hidden">
+        <button id="mobile-menu-button" class="text-gray-800 focus:outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu (hidden by default) -->
+  <div id="mobile-menu" class="hidden bg-white shadow-lg">
+    <div class="flex flex-col space-y-4 px-6 py-4">
+      <a href="#home" class="text-lg text-gray-800 hover:text-indigo-600">Home</a>
+      <a href="#features" class="text-lg text-gray-800 hover:text-indigo-600">Features</a>
+      <a href="#pricing" class="text-lg text-gray-800 hover:text-indigo-600">Pricing</a>
+      <a href="#about" class="text-lg text-gray-800 hover:text-indigo-600">About Us</a>
+      <a href="#contact" class="text-lg text-gray-800 hover:text-indigo-600">Contact</a>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content Section with Illustrations -->
+<div class="bg-white py-24 mt-24">
+  <div class="max-w-6xl mx-auto px-6 text-center">
+    <h1 class="text-5xl font-extrabold text-gray-800">
+      Register Your School
+    </h1>
+    <p class="mt-4 text-xl text-gray-600">
+      Join our platform and manage your school efficiently with features designed for growth, security, and ease.
+    </p>
+
+    <!-- Illustration Section -->
+    <div class="mt-12">
+      <%= image_tag "product.svg", alt: "Academic Illustration", class: "mx-auto h-64 md:h-96 object-contain transition-transform duration-500 ease-in-out transform hover:scale-105" %>
+    </div>
+  </div>
+
+  <!-- Form Section -->
+  <div class="max-w-xl mx-auto bg-white rounded-lg shadow-xl mt-12 p-10">
+    <%= form_with model: @school, url: schools_path, local: true do |f| %>
+      <!-- School Name Field -->
+      <div class="mb-6">
+        <%= f.label :name, class: "text-gray-700 font-semibold text-lg" %>
+        <%= f.text_field :name, class: "w-full bg-gray-100 border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none rounded-lg py-4 px-5 mt-2 text-gray-800 placeholder-gray-400 transition ease-in-out duration-300 hover:bg-gray-200", placeholder: "Enter School Name" %>
+      </div>
+
+      <!-- Subdomain Field -->
+      <div class="mb-6">
+        <%= f.label :subdomain, class: "text-gray-700 font-semibold text-lg" %>
+        <%= f.text_field :subdomain, class: "w-full bg-gray-100 border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none rounded-lg py-4 px-5 mt-2 text-gray-800 placeholder-gray-400 transition ease-in-out duration-300 hover:bg-gray-200", placeholder: "Choose Subdomain (e.g., myschool)" %>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="mt-8">
+        <%= f.submit "Register", class: "w-full bg-blue-600 text-white font-semibold py-4 rounded-lg shadow-md hover:bg-blue-700 transition duration-300 transform hover:scale-105" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<!-- Why Choose Us Section with Illustrations -->
+<div class="bg-gray-50 py-20">
+  <div class="max-w-6xl mx-auto text-center px-6">
+    <h2 class="text-4xl font-extrabold text-gray-800">
+      Why Register With Us?
+    </h2>
+    <p class="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
+      A platform built for your success. Empower your school with advanced features to ensure growth, safety, and engagement.
+    </p>
+
+    <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+      <!-- Feature 1 with Illustration -->
+      <div class="flex flex-col items-center bg-white rounded-lg shadow-lg hover:shadow-2xl transition duration-300 ease-in-out p-8 hover:scale-105">
+        <div class="h-16 w-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+          <%= image_tag "time.svg", alt: "Management Illustration", class: "h-16 w-16 transition-transform duration-300 ease-in-out hover:scale-110" %>
+        </div>
+        <h3 class="text-2xl font-semibold text-gray-800">Streamlined Management</h3>
+        <p class="mt-4 text-gray-600">
+          Simplify all your school management tasks from admissions to grades, ensuring a smoother operation.
+        </p>
+      </div>
+
+      <!-- Feature 2 with Illustration -->
+      <div class="flex flex-col items-center bg-white rounded-lg shadow-lg hover:shadow-2xl transition duration-300 ease-in-out p-8 hover:scale-105">
+        <div class="h-16 w-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+          <%= image_tag "analytic1.svg", alt: "Analytics Illustration", class: "h-16 w-16 transition-transform duration-300 ease-in-out hover:scale-110" %>
+        </div>
+        <h3 class="text-2xl font-semibold text-gray-800">Real-Time Insights</h3>
+        <p class="mt-4 text-gray-600">
+          View up-to-date reports and analytics to make data-driven decisions for your school’s success.
+        </p>
+      </div>
+
+      <!-- Feature 3 with Illustration -->
+      <div class="flex flex-col items-center bg-white rounded-lg shadow-lg hover:shadow-2xl transition duration-300 ease-in-out p-8 hover:scale-105">
+        <div class="h-16 w-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+          <%= image_tag "security.svg", alt: "Security Illustration", class: "h-16 w-16 transition-transform duration-300 ease-in-out hover:scale-110" %>
+        </div>
+        <h3 class="text-2xl font-semibold text-gray-800">Top-Notch Security</h3>
+        <p class="mt-4 text-gray-600">
+          Keep your school’s data secure with encrypted storage and top-tier security protocols.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer Section -->
+<footer class="bg-gradient-to-r from-blue-800 to-indigo-900 py-8">
+  <div class="max-w-7xl mx-auto px-6 flex justify-between items-center text-white">
+    <div>
+      © 2025 <%= "@current_school.name" %>
+    </div>
+
+    <div class="flex space-x-4">
+      <a href="#privacy" class="hover:text-blue-300 transition duration-200">Privacy</a>
+      <a href="#terms" class="hover:text-blue-300 transition duration-200">Terms</a>
+      <a href="#contact" class="hover:text-blue-300 transition duration-200">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript for Mobile Menu Toggle -->
+<script>
+  const menuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  menuButton.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+</script>

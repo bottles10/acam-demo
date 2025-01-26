@@ -1,4 +1,6 @@
 class HomeController < ApplicationController
+  before_action :authenticate_user!
+
   def dashboard
     @total_teachers = User.all_teachers.count
     @total_students = Student.all.count

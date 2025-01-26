@@ -1,4 +1,5 @@
 class Subject < ApplicationRecord
+  belongs_to :school, default: -> { Current.school }
   has_many :subject_teachers, dependent: :destroy
   has_many :teachers, through: :subject_teachers, source: :teacher
   has_many :reports

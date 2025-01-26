@@ -1,4 +1,5 @@
 class ReportsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_report, only: %i[ edit update destroy ]
   before_action :set_student, only: %i[ index new create edit update]
 

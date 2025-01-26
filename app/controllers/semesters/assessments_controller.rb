@@ -1,5 +1,6 @@
 module Semesters
   class AssessmentsController < ApplicationController
+    before_action :authenticate_user!
     before_action :set_student_and_semester, only: %i[ create ]
   
     def create
