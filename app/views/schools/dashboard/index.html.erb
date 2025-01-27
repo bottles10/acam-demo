@@ -1,7 +1,7 @@
 <h1 class="px-4 font-serif text-2xl font-bold">Dashboard</h1>
 <div class="p-4">
   <!-- badges -->  
-  <div class="mb-8 grid grid-cols-2 md:grid-cols-4 gap-6">
+  <div class="mb-8 grid grid-cols-2 lg:grid-cols-4 gap-6">
     <div class="py-4 flex flex-col items-center justify-center space-y-3 font-medium text-sm bg-purple-200 shadow-2xl rounded-lg">
       <div class="mb-2 w-8 h-8 flex flex-col items-center justify-center bg-purple-500 transform rotate-45 rounded">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 transform -rotate-45 text-white">
@@ -50,7 +50,7 @@
   </div>
 
   <!-- chart for subjects performance -->
-  <div class="mb-8 md:grid grid-cols-5 gap-6">
+  <div class="mb-8 lg:grid grid-cols-5 gap-6 space-y-2 lg:space-y-0">
     <div class="col-span-4 p-2 rounded-lg shadow-2xl">
     <h3 class="font-serif font-semibold">Statistics</h3>
       <%= column_chart @subject_scores.map { |subject_term, score| [subject_term, score] }, id: "subject-performance-bar-chart",  colors: ["#0d9488"]  %>
