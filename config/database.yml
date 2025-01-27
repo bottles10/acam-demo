@@ -81,9 +81,7 @@ test:
 production:
   primary: &primary_production
     <<: *default
-    database: report_current_demo_production
-    username: report_current_demo
-    password: <%= ENV["REPORT_CURRENT_DEMO_DATABASE_PASSWORD"] %>
+    url: <%= Rails.application.credentials.dig(:database_url) %>
   cache:
     <<: *primary_production
     database: report_current_demo_production_cache
