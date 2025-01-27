@@ -1,4 +1,5 @@
 class Report < ApplicationRecord
+  belongs_to :school
   belongs_to :student
   belongs_to :subject
   belongs_to :semester

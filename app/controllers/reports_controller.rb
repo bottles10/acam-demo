@@ -4,7 +4,7 @@ class ReportsController < ApplicationController
   before_action :set_student, only: %i[ index new create edit update]
 
   def index
-    @semester = params[:semester_id].present? ? Semester.find(params[:semester_id]) : Semester.order(year: :desc, term: :desc).first
+    @semester = params[:semester_id].present? ? @current_school.semesters.find(params[:semester_id]) : @current_school.semesters.order(year: :desc, term: :desc).first
     @reports = @semester ? @student.reports.by_semester(@semester.id).includes(:subject) : @student.reports.includes(:subject)
     @new_assessment = @semester.assessments.find_or_initialize_by(student: @student) || @semester.assessments.build(student: @student)
   end
@@ -12,8 +12,8 @@ class ReportsController < ApplicationController
 
   def new
     @report = @student.reports.new
-    @subjects = Subject.all
-    @semesters = Semester.all
+    @subjects = @current_school.subjects
+    @semesters = @current_school.semesters
   end
 
   def create
@@ -32,8 +32,8 @@ class ReportsController < ApplicationController
   end
 
   def edit
-    @subjects = Subject.all
-    @semesters = Semester.all
+    @subjects = @current_school.subjects
+    @semesters = @current_school.semesters
     authorize @report
   end
 
@@ -65,7 +65,7 @@ class ReportsController < ApplicationController
   private
 
   def set_student
-    @student = Student.find(params.expect(:student_id))
+    @student = @current_school.students.find(params.expect(:student_id))
   end
 
   def set_report

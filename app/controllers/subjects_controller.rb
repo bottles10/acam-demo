@@ -4,20 +4,20 @@ class SubjectsController < ApplicationController
   before_action :only_admin_authorized, except: %i[ index show ]
 
   def index
-    @subjects = Subject.all
+    @subjects = @current_school.subjects.all
   end
 
   def show
   end
 
   def new
-    @subject = Subject.new
-    @teachers = User.all_teachers
+    @subject = @current_school.subjects.new
+    @teachers = @current_school.users.all_teachers
   end
 
   def create
     # Use the model's method to handle subject creation and teacher association
-    @subject = Subject.find_or_create_with_teachers(subject_params)
+    @subject = @current_school.subjects.find_or_create_with_teachers(subject_params)
 
     respond_to do |format|
       if @subject.persisted?
@@ -30,7 +30,7 @@ class SubjectsController < ApplicationController
   end
 
   def edit
-    @teachers = User.all_teachers
+    @teachers = @current_school.users.all_teachers
   end
 
   def update
@@ -54,7 +54,7 @@ class SubjectsController < ApplicationController
   private
 
   def set_subject
-    @subject = Subject.find(params.expect(:id))
+    @subject = @current_school.subjects.find(params.expect(:id))
   end
 
   def subject_params

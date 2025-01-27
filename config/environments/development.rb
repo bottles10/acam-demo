@@ -72,4 +72,5 @@ Rails.application.configure do
 
   config.assets.debug = true
   config.hosts.clear
+  config.web_console.permissions = '154.161.50.46'
 end

@@ -5,9 +5,9 @@ class StudentsController < ApplicationController
 
 	def index
 		if params[:current_basic].present?
-			@students = Student.where(current_basic: params[:current_basic])
+			@students = @current_school.students.where(current_basic: params[:current_basic])
 		else
-			@students = Student.all
+			@students = @current_school.students
 		end
 	end
 
@@ -15,11 +15,11 @@ class StudentsController < ApplicationController
 	end
 
 	def new
-		@student = Student.new
+		@student = @current_school.students.new
 	end
 
 	def create
-		@student = Student.new(student_params)
+		@student = @current_school.students.new(student_params)
 
 		respond_to do |format|
 			if @student.save
@@ -56,7 +56,7 @@ class StudentsController < ApplicationController
 	private
 
 	def set_student
-		@student = Student.find(params.expect(:id))
+		@student = @current_school.students.find(params.expect(:id))
 	end
 
 	def student_params

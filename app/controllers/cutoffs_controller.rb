@@ -5,7 +5,7 @@ class CutoffsController < ApplicationController
 
   # GET /offcuts or /offcuts.json
   def index
-    @cutoffs = Cutoff.all.order(created_at: :desc)
+    @cutoffs = @current_school.cutoffs.all.order(created_at: :desc)
   end
 
   # GET /cutoffs/1 or /cutoffs/1.json
@@ -14,7 +14,7 @@ class CutoffsController < ApplicationController
 
   # GET /cutoffs/new
   def new
-    @cutoff = Cutoff.new
+    @cutoff = @current_school.cutoffs.new
   end
 
   # GET /cutoffs/1/edit
@@ -23,7 +23,7 @@ class CutoffsController < ApplicationController
 
   # POST /cutoffs or /cutoffs.json
   def create
-    @cutoff = Cutoff.new(cutoff_params)
+    @cutoff = @current_school.cutoffs.new(cutoff_params)
 
     respond_to do |format|
       if @cutoff.save
@@ -62,7 +62,7 @@ class CutoffsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_cutoff
-      @cutoff = Cutoff.find(params.expect(:id))
+      @cutoff = @current_school.cutoffs.find(params.expect(:id))
     end
 
     # Only allow a list of trusted parameters through.

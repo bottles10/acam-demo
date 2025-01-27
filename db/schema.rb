@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_26_021804) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_26_103108) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -27,6 +27,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_26_021804) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "next_basic_level"
+    t.bigint "school_id", null: false
+    t.index ["school_id"], name: "index_assessments_on_school_id"
     t.index ["semester_id"], name: "index_assessments_on_semester_id"
     t.index ["student_id"], name: "index_assessments_on_student_id"
   end
@@ -52,7 +54,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_26_021804) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "class_scores"
+    t.bigint "school_id", null: false
     t.index ["grade"], name: "index_reports_on_grade"
+    t.index ["school_id"], name: "index_reports_on_school_id"
     t.index ["semester_id"], name: "index_reports_on_semester_id"
     t.index ["student_id"], name: "index_reports_on_student_id"
     t.index ["subject_id"], name: "index_reports_on_subject_id"
@@ -122,9 +126,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_26_021804) do
     t.index ["school_id"], name: "index_users_on_school_id"
   end
 
+  add_foreign_key "assessments", "schools"
   add_foreign_key "assessments", "semesters"
   add_foreign_key "assessments", "students"
   add_foreign_key "cutoffs", "schools"
+  add_foreign_key "reports", "schools"
   add_foreign_key "reports", "semesters"
   add_foreign_key "reports", "students"
   add_foreign_key "reports", "subjects"

@@ -1,26 +1,23 @@
 module Semesters
   class AssessmentsController < ApplicationController
     before_action :authenticate_user!
-    before_action :set_student_and_semester, only: %i[ create ]
-  
+    before_action :set_student_and_semester, only: %i[create]
+    before_action :set_assessment, only: %i[destroy]
+
     def create
       @assessment = @semester.assessments.new(assessment_params)
       @assessment.student = @student
 
       respond_to do |format|
-  
         if @assessment.save
           format.html { redirect_to student_reports_path(@student, semester_id: @semester.id), notice: "Assessment created successfully!" }
         else
-          format.turbo_stream    
+          format.turbo_stream
         end
       end
     end
 
     def destroy
-      @semester = Semester.find(params.expect(:semester_id))
-      @student = Student.find(params.expect(:student_id))
-      @assessment = Assessment.find(params.expect(:id))
       @assessment.destroy!
 
       respond_to do |format|
@@ -28,11 +25,18 @@ module Semesters
         format.json { head :no_content }
       end
     end
+
     private
   
     def set_student_and_semester     
-      @semester = Semester.find(params.expect(:semester_id))
-      @student = Student.find(params.require(:assessment).require(:student_id))
+      @semester = @current_school.semesters.find(params.expect(:semester_id))
+      @student = @current_school.students.find(params.require(:assessment).require(:student_id))
+    end
+
+    def set_assessment
+      @assessment = @current_school.assessments.find(params.expect(:id))
+      @semester = @assessment.semester
+      @student = @assessment.student
     end
     
   

@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 	
-	belongs_to :school, default: -> { Current.school }
+	belongs_to :school
   has_many :subject_teachers, foreign_key: :teacher_id, dependent: :destroy
   has_many :subjects, through: :subject_teachers
   
@@ -13,7 +13,7 @@ class User < ApplicationRecord
 
 	after_create :assign_admin_if_needed
 	after_destroy :assign_admin_if_needed
-  
+  validates :school, presence: true
 	validates :username, presence: true, 
 						uniqueness: { case_sensitive: false }, 
 						length: { minimum: 2 }
@@ -21,6 +21,7 @@ class User < ApplicationRecord
 	enum :role, { admin: 0, teacher: 1 }
 
 	scope :all_teachers, -> { where(role: :teacher) }
+	default_scope { where(school: Current.school) }
 
 	private
 
