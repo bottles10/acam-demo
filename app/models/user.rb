@@ -21,7 +21,10 @@ class User < ApplicationRecord
 	enum :role, { admin: 0, teacher: 1 }
 
 	scope :all_teachers, -> { where(role: :teacher) }
-	default_scope { where(school: Current.school) }
+	
+	def self.find_for_authentication(warden_conditions)
+    where(school: Current.school).find_by(username: warden_conditions[:username])
+  end
 
 	private
 
