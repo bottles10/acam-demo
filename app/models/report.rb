@@ -1,5 +1,5 @@
 class Report < ApplicationRecord
-  belongs_to :school
+  belongs_to :school, default: -> { Current.school }
   belongs_to :student
   belongs_to :subject
   belongs_to :semester
@@ -30,13 +30,13 @@ class Report < ApplicationRecord
     puts "class percentage in decimals: #{class_percentage}"
     total_class_score = parsed_class_scores.sum
     puts "total class score: #{total_class_score}"
-    (total_class_score * class_percentage).round(2)
+    (total_class_score * class_percentage).round
   end
 
   def exam_score_percentage_cutoff_result
     cutoff_percentages = student.cutoff_percentage
     exam_percentage = cutoff_percentages[:exam_cutoff_percentage].to_f / 100
-    (exam_score * exam_percentage)
+    (exam_score * exam_percentage).round
   end
 
   def convert_class_scores_to_string

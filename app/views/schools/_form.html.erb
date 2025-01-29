@@ -1,0 +1,22 @@
+<%= form_with(model: school) do |f| %>
+  
+  <div class="space-y-6">
+    
+    <%= render partial: "layouts/shared/error_explanation", locals: { model_name: school } %>
+    
+    <div>
+      <%= f.label :name, class: "text-gray-700 font-semibold text-lg" %>
+      <%= f.text_field :name, class: "w-full bg-gray-100 border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none rounded-lg py-4 px-5 mt-2 text-gray-800 placeholder-gray-400 transition ease-in-out duration-300 hover:bg-gray-200", placeholder: "Enter School Name" %>
+    </div>
+
+    <div>
+      <%= f.label :subdomain, class: "text-gray-700 font-semibold text-lg" %>
+      <%= f.text_field :subdomain, class: "w-full bg-gray-100 border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none rounded-lg py-4 px-5 mt-2 text-gray-800 placeholder-gray-400 transition ease-in-out duration-300 hover:bg-gray-200", placeholder: "Choose Subdomain (e.g., myschool)" %>
+    </div>
+
+    <div class="!mt-8">
+      <%= f.submit "Register", class: "w-full py-4 font-semibold btn-primary hover:bg-blue-500 hover:scale-105 transition-all duration-500" %>
+    </div>
+
+  </div>
+<% end %>

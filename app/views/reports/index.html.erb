@@ -60,8 +60,8 @@
           <tr class="even:bg-gray-200 hover:bg-gray-100">
             <td class="border px-4 py-2 text-center text-gray-800"><%= report.subject.subject_name %></td>
             <td class="border px-4 py-2 text-center text-gray-600"><%= report.class_scores %></td>
-            <td class="border px-4 py-2 text-center text-gray-600"><%= report.exam_score %></td>
-            <td class="border px-4 py-2 text-center text-gray-600"><%= report.total %></td>
+            <td class="border px-4 py-2 text-center text-gray-600"><%= report.exam_score.to_i %></td>
+            <td class="border px-4 py-2 text-center text-gray-600"><%= report.total.to_i %></td>
             <td class="border px-4 py-2 text-center text-gray-600"><%= report.grade %></td>
             <td class="border px-4 py-2 text-center text-gray-600"><%= report.remarks %></td>
             <td class="flex items-center justify-between border px-4 py-2 text-center">
