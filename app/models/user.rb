@@ -4,6 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 	
+
+	has_secure_token :ferrum_session_token
+
 	belongs_to :school, default: ->{ Current.school }
   has_many :subject_teachers, foreign_key: :teacher_id, dependent: :destroy
   has_many :subjects, through: :subject_teachers

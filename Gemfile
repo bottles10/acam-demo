@@ -73,3 +73,5 @@ gem "pundit", "~> 2.4"
 gem "chartkick", "~> 5.1"
 
 gem "rack-cors", "~> 2.0"
+
+gem "ferrum", "~> 0.16"

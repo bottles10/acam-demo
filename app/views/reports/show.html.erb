@@ -1,11 +1,5 @@
 <!-- Filter by semester form -->
-<div class="no-print">
-      <%= form_with url: student_reports_path(@student), method: :get, local: true, class: "flex space-x-4" do |f| %>
-        <%= f.label :semester_id, "Filter by Semester:", class: "font-medium" %>
-        <%= f.select :semester_id, Semester.all.collect { |semester| ["#{semester.year.year} - Term #{semester.term}", semester.id ] }, { include_blank: "Select a semester" }, class: "form-control bg-white rounded" %>
-        <%= f.submit "Filter", name: nil, class: "btn-primary" %>
-      <% end %>
-</div>
+
 
 <div class="container mx-auto px-4 py-8">
   <div class="flex items-center justify-center space-x-5">
@@ -37,25 +31,16 @@
   </div>
   
 
-  <div class="no-print mb-4 flex justify-between items-center">
-    <a href="<%= new_student_report_path(@student) %>" class="btn-primary hover:bg-blue-500 hover:scale-105 transition-all duration-300">Add New Report</a>
-    <p>
-      <%= link_to "Open as PDF", student_reports_path(@student, semester_id: @semester.id, format: :pdf), target: :_blank, class: "ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-  </p>
-  </div>
-
   <div class="overflow-x-auto">
     <table class="table-auto w-full bg-white shadow-md rounded-lg">
       <thead>
-        <tr class="text-sm bg-gray-500 text-white">
+        <tr class="bg-gray-500 text-white">
           <th class="px-4 py-2">Subject</th>
           <th class="px-4 py-2">Class Score (<%= @student.cutoff_percentage[:class_cutoff_percentage] %>%)</th>
           <th class="px-4 py-2">Exam Score (<%= @student.cutoff_percentage[:exam_cutoff_percentage] %>%)</th>
           <th class="px-4 py-2">Total (100%)</th>
           <th class="px-4 py-2">Grade</th>
-          <th class="px-4 py-2">Remarks</th>
-          <th class="no-print bg-red-600 px-4 py-2">Actions</th>
-          
+          <th class="px-4 py-2">Remarks</th>          
         </tr>
       </thead>
       <tbody>
@@ -67,10 +52,6 @@
             <td class="border px-4 py-2 text-center text-gray-600"><%= report.total.to_i %></td>
             <td class="border px-4 py-2 text-center text-gray-600"><%= report.grade %></td>
             <td class="border px-4 py-2 text-center text-gray-600"><%= report.remarks %></td>
-            <td class="no-print flex items-center justify-between border px-4 py-2 text-center">
-              <a href="<%= edit_student_report_path(@student, report) %>" class="inline-block text-blue-500 hover:text-blue-700 font-medium">Edit</a> |
-              <%= button_to 'Destroy', student_report_path(@student, report), method: :delete, data: { turbo_confirm: 'Are you sure?' }, class: 'inline-block text-red-500 hover:text-red-700 font-medium' %>
-            </td>
           </tr>
         <% end %>
       </tbody>
@@ -104,23 +85,11 @@
       <p clas="font-medium"> Form Master:	<span class="text-sm font-normal text-purple-800 underline underline-offset-2 decoration-dashed"><%= @new_assessment.form_master %></p>
       <p clas="font-medium"> Head's Signature:	<%= "" %></p>
 
-      <%= button_to "Delete", semester_assessment_path(@new_assessment.semester_id, @new_assessment), method: :delete,
-                            params: { student_id: @new_assessment.student_id }, 
-														data: {turbo_confirm: "Student's assessment will be deleted for this semester!"},
-														class: "no-print mt-4 btn-danger hover:font-bold hover:scale-105 transition-all duration-300" %>
     <% else %>
       <p>No Assessment record submitted for <span class="font-medium text-purple-800"><%= @student.fullname %></span>
 		<% end %>
 	</div>
 
   <hr class="my-4">
-  <div class="no-print overflow-x-auto">
-    <% unless @new_assessment.persisted? %>
-      <div id="<%= dom_id(@new_assessment) %>"> 
-        <h3 class="text-3xl font-semibold text-center">Assessment</h3>
-        <%= render partial: "semesters/assessments/form", locals: { student: @student, assessment: @new_assessment, semester: @semester } %>
-      </div>
-    <% end %>
-  </div>
   
 </div>
