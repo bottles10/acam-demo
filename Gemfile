@@ -74,4 +74,5 @@ gem "chartkick", "~> 5.1"
 
 gem "rack-cors", "~> 2.0"
 
-gem "ferrum", "~> 0.16"
+
+gem "ferrum_pdf", "~> 0.3.0"

@@ -1,7 +1,6 @@
 class ReportsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :check_grading_scale_and_semester
-  before_action :set_report, only: %i[ edit update destroy ]
+  before_action :authenticate_ferrum_session
+  before_action :set_report, only: %i[ show edit update destroy ]
   before_action :set_student
 
   def index
@@ -12,18 +11,24 @@ class ReportsController < ApplicationController
     @semester_id = @semester.id
     
     respond_to do |format|
-    format.html
-    format.pdf {
-      pdf = render_pdf(
-        pdf_options: {
-                        margin_top: 0.02
-                    }
-      )
-      send_data pdf, disposition: :inline, filename: "#{@student.fullname.parameterize}-#{@current_school.name.parameterize}.pdf"
-    }
-  end
+      format.html
+      format.pdf do 
+        tmp = Tempfile.new
+        browser = Ferrum::Browser.new(process_timeout: 30, timeout: 200, pending_connection_errors: true)
+        page = browser.create_page
+        page.headers.set("X-Ferrum-Session" => Rails.application.credentials.dig(:ferrum_session_token))
+        page.go_to(student_reports_url(@student))
+        sleep(0.3)
+        page.pdf(path: tmp)
+        browser.quit
+        send_file tmp, type: "application/pdf", disposition: "inline"
+      end
+    end
   end
   
+  def show
+    
+  end
 
   def new
     @report = @student.reports.new
@@ -79,16 +84,13 @@ class ReportsController < ApplicationController
 
   private
 
-  def check_grading_scale_and_semester
-    @student = @current_school.students.find(params.expect(:student_id))
-    puts "******** semesters: #{ @current_school.semesters.exists? } ********"
-    puts "******** grading scale: #{ !@student.cutoff_percentage[:class_cutoff_percentage].zero? } ********"
-    if !@current_school.semesters.exists? 
-      flash[:alert] = "Add semester to continue..."
-      redirect_to(request.referer) and return
-    elsif @student.cutoff_percentage[:class_cutoff_percentage].zero? && @student.cutoff_percentage[:exam_cutoff_percentage].zero?
-      flash[:alert] = "You need to add grade scale for student's class!" 
-      redirect_to(request.referer) and return
+  # used to bypass devise authentication for x-ferrum header when using the ferrum gem
+  def authenticate_ferrum_session
+    if request.headers["X-Ferrum-Session"].present?
+      user = User.find_by(ferrum_session_token: request.headers["X-Ferrum-Session"])
+      sign_in(user) if user
+    else
+      authenticate_user!
     end
   end
 

@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 	
 
-	has_secure_token :ferrum_session_token
+	has_secure_token :ferrum_session_token # used when using the ferrum gem. just keeping it
 
 	belongs_to :school, default: ->{ Current.school }
   has_many :subject_teachers, foreign_key: :teacher_id, dependent: :destroy
