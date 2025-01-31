@@ -1,4 +1,4 @@
-class ReportsController < ApplicationController
+class OldReportsController < ApplicationController
   before_action :authenticate_ferrum_session
   before_action :set_report, only: %i[ show edit update destroy ]
   before_action :set_student

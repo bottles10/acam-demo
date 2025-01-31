@@ -15,6 +15,12 @@ class Student < ApplicationRecord
 											basic_seven: 6, basic_eight: 7, 
 											basic_nine: 8 }
 	
+	
+	# Friendly url
+	def to_param
+    "#{id}-#{self.fullname.downcase.to_s[0...100]}".parameterize
+  end
+
 	def fullname
 		"#{self.first_name + " " + self.last_name}"
 	end
