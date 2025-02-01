@@ -35,9 +35,15 @@
     </div>
     
     <div>
-      <%= f.label :logo, class: "text-gray-700 font-semibold text-lg" %>
-      <%= f.file_field :logo %>
+      <label for="file-upload" 
+            class="flex items-center space-x-3 cursor-pointer transform hover:scale-105 transition duration-500 text-gray-700 font-semibold text-lg">
+        <%= image_tag("upload-file.png", alt: "file upload icon", width: "40", class: "inline") %>
+        <span>Attach File</span>
+      </label>
+      <%= f.file_field :logo, id: "file-upload", class: "hidden" %>
     </div>
+  
+  
 
     <div class="!mt-8">
       <%= f.submit(school.new_record? ? "Register" : "Update", class: "w-full py-4 font-semibold btn-primary hover:bg-blue-500 hover:scale-105 transition-all duration-500") %>
