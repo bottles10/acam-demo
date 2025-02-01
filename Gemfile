@@ -76,3 +76,5 @@ gem "rack-cors", "~> 2.0"
 
 
 gem "ferrum_pdf", "~> 0.3.0"
+
+gem "active_storage_validations", "~> 2.0"

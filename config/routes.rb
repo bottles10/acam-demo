@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     end
     resources :subjects
     resources :cutoffs
+    resources :schools, only: %i[ edit update ]
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -25,6 +26,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "home#dashboard"
-  root 'schools#new' # Root for the main app
   resources :schools, only: [:new, :create]
+  root 'schools#new', as: :main_root
 end

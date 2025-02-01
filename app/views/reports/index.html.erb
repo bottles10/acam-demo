@@ -9,14 +9,14 @@
 
 <div class="container mx-auto px-4 py-8">
   <div class="flex items-center justify-center space-x-5">
-    <div class="w-20 h-20 bg-gray-200 rounded-full text-center">school logo</div>
+    <div class="w-20 h-20 bg-gray-200 rounded-full text-center"><%= apply_logo(@current_school, 80) %></div>
     <div class="">
       <P class="text-3xl font-bold"><%= @current_school.name %></P>
-      <h2 class="text-xl font-bold text-center"><%= "a tripple foobar" %></h2>
+      <h2 class="text-xl font-bold text-center"><%= @current_school.motto %></h2>
       <div class="flex item-center justify-center space-x-3">
-        <p><span class="font-medium">Phone number:</span> 0000000000</p>
-        <p><span class="font-medium">Email:</span> foo@bar.com</p>
-        <p><span class="font-medium">Box Address:</span> P.0.Box 000</p>
+        <p><span class="font-medium">Phone number: </span><%= @current_school.phone_number %></p>
+        <p><span class="font-medium">Email: </span><%= @current_school.email %></p>
+        <p><span class="font-medium">Box Address: </span><%= @current_school.box_address %></p>
       </div>
     </div>
   </div>

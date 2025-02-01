@@ -16,19 +16,19 @@ class ApplicationController < ActionController::Base
       if @current_school
         Current.school = @current_school
       end
-      redirect_to root_url(subdomain: nil), allow_other_host: true,  alert: 'School not found' unless @current_school
+      redirect_to main_root_url(subdomain: nil), allow_other_host: true,  alert: 'School not found' and return  unless @current_school
     end
   end
 
   def user_not_authorized
     flash[:alert] = 'You are not assigned to this subject. Cannot perform any action.'
-    redirect_to(request.referer || root_path) and return
+    redirect_to(request.referer || school_root_path) and return
   end
 
   def only_admin_authorized
     unless current_user.admin?
       flash[:alert] =  'Only administrators authorized!'
-      redirect_to(request.referer || root_path) and return 
+      redirect_to(request.referer || school_root_path) and return 
     end
   end
 
