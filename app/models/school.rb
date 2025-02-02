@@ -14,4 +14,9 @@ class School < ApplicationRecord
   validates :name, presence: true
   validates :subdomain, presence: true, uniqueness: true, format: { with: /\A[a-z0-9\-]+\z/, message: "must contain only letters, numbers, or hyphens" }
   validates :phone_number, :email, :box_address, :motto, presence: true
+
+  	# Friendly url
+	def to_param
+    "#{id}-#{self.subdomain.downcase.to_s[0...100]}".parameterize
+  end
 end

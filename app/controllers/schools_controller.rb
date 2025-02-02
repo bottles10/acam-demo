@@ -9,7 +9,7 @@ class SchoolsController < ApplicationController
   def create
     @school = School.new(school_params)
     if @school.save
-      redirect_to root_url(subdomain: @school.subdomain), allow_other_host: true, notice: "School successfully created! Visit your school's dashboard."
+      redirect_to school_root_url(subdomain: @school.subdomain), allow_other_host: true, notice: "School successfully created! Visit your school's dashboard."
     else
       flash.now[:alert] = "Error creating school. Please check your input."
       render :new, status: :unprocessable_entity
