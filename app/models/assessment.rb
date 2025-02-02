@@ -14,8 +14,15 @@ class Assessment < ApplicationRecord
 											basic_nine: 8 }
 
   before_save :upcase_assessment_attributes
+  after_create :update_student_basic_level
 
   private
+
+  def update_student_basic_level
+    return unless next_basic_level.present?
+
+    student.update(current_basic: next_basic_level)
+  end
 
   def upcase_assessment_attributes
     self.attitude = attitude.upcase

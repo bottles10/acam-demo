@@ -10,7 +10,11 @@ module Semesters
 
       respond_to do |format|
         if @assessment.save
-          format.html { redirect_to student_reports_path(@student, semester_id: @semester.id), notice: "Assessment created successfully!" }
+          if @assessment.student.cutoff_percentage[:class_cutoff_percentage].zero? && @assessment.student.cutoff_percentage[:exam_cutoff_percentage].zero?
+            format.html { redirect_to students_url, notice: "Assessment created successfully, now add grade scale for student's class!" }
+          else
+            format.html { redirect_to student_reports_path(@student, semester_id: @semester.id), notice: "Assessment created successfully!" }
+          end
         else
           format.turbo_stream
         end
@@ -34,7 +38,7 @@ module Semesters
     end
 
     def set_assessment
-      @assessment = @current_school.assessments.find(params.expect(:id))
+      @assessment = Assessment.find(params.expect(:id))
       @semester = @assessment.semester
       @student = @assessment.student
     end
