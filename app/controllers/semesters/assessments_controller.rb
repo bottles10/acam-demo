@@ -11,7 +11,7 @@ module Semesters
       respond_to do |format|
         if @assessment.save
           if @assessment.student.cutoff_percentage[:class_cutoff_percentage].zero? && @assessment.student.cutoff_percentage[:exam_cutoff_percentage].zero?
-            format.html { redirect_to students_url, notice: "Assessment created successfully, now add grade scale for student's class!" }
+            format.html { redirect_to students_path, alert: "Student promoted to a class with no grading scale!" }
           else
             format.html { redirect_to student_reports_path(@student, semester_id: @semester.id), notice: "Assessment created successfully!" }
           end
