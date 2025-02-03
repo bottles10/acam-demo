@@ -3,11 +3,11 @@
     <div class="border border-gray-200 shadow-lg hover:shadow-xl hover:scale-105 rounded-lg transition duration-300">
       <div class="py-6 px-3 flex flex-col h-full">
         <h2 class="mb-4 text-xl text-center font-semibold text-gray-800">
-          <%= teacher.username %>
+          <%= teacher.fullname %>
         </h2>
 
         <!-- Form for updating the teacher role -->
-        <%= form_with url: update_role_path(teacher), method: :patch, data: { turbo_confirm: "Are you sure you want to update the role of #{teacher.username}?" } do |f| %>
+        <%= form_with url: update_role_path(teacher), method: :patch, data: { turbo_confirm: "Are you sure you want to update the role of #{ teacher.fullname }?" } do |f| %>
           <div class="mb-4">
             <%= f.label :role, "Role", class: "block text-sm font-medium text-gray-700" %>
             <%= f.select :role, User.roles.keys.map { |role| [role.humanize, role] }, { include_blank: "Select role" }, class: "form-control border-l-pink-500 rounded" %>

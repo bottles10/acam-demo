@@ -15,7 +15,7 @@
     
         <!-- Dropdown Content (Visible when hovering over the button) -->
         <div class="absolute left-0 hidden bg-white border-l-2 border-pink-500 shadow-lg rounded-md w-64 z-10 group-hover:block">
-          <%= form.collection_checkboxes :teacher_ids, @teachers, :id, :username do |b| %>
+          <%= form.collection_checkboxes :teacher_ids, @teachers, :id, :fullname do |b| %>
             <label class="block px-4 py-2 text-gray-700">
               <%= b.check_box(class: 'h-5 w-5') %>
               <%= b.label(class: 'ml-2 text-sm text-rose-700') %>

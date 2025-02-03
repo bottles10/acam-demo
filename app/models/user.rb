@@ -20,6 +20,7 @@ class User < ApplicationRecord
 	validates :username, presence: true, 
 						uniqueness: { case_sensitive: false }, 
 						length: { minimum: 2 }
+	validates :first_name, :last_name, presence: true, length: { minimum: 2 }
 	validates :role, presence: true, allow_nil: false
 
 	enum :role, { admin: 0, teacher: 1 }
@@ -29,6 +30,15 @@ class User < ApplicationRecord
 	def self.find_for_authentication(warden_conditions)
     where(school: Current.school).find_by(username: warden_conditions[:username])
   end
+
+	# Friendly url
+	def to_param
+    "#{id}-#{self.fullname.downcase.to_s[0...100]}".parameterize
+  end
+	
+	def fullname
+		"#{self.first_name + " " + self.last_name}".titleize
+	end
 
 	private
 

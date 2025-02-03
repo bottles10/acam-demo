@@ -22,7 +22,7 @@ class Student < ApplicationRecord
   end
 
 	def fullname
-		"#{self.first_name + " " + self.last_name}"
+		"#{self.first_name + " " + self.last_name}".titleize
 	end
 
 	 # Fetch the cutoff percentage for the student's current_basic
