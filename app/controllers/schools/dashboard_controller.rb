@@ -3,6 +3,12 @@ module Schools
     # before_action :require_school
     before_action :authenticate_user!
 
+  def waiting_room
+    if current_user.admin? || !current_user.subjects.blank?
+      redirect_to students_path, alert: "You are not part of subject assign waiting list!"
+    end
+  end
+
   def index
     @total_teachers = @current_school.users.all_teachers.count
     @total_students = @current_school.students.count

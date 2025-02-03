@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   constraints(SubdomainConstraint) do
     scope module: 'schools' do
       root 'dashboard#index', as: :school_root
+      get 'waiting_room', to: 'dashboard#waiting_room', as: :waiting_room
     end
     devise_for :users
     resources :students do

@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   # allow_browser versions: :modern
   before_action :set_current_school
+  before_action :teacher_assigned_subject?, unless: -> { action_name.in?(["waiting_room", "destroy"]) }
   before_action :configure_permitted_parameters, if: :devise_controller?
 
 
@@ -17,6 +18,15 @@ class ApplicationController < ActionController::Base
         Current.school = @current_school
       end
       redirect_to main_root_url(subdomain: nil), allow_other_host: true,  alert: 'School not found' and return  unless @current_school
+    end
+  end
+
+  def teacher_assigned_subject?
+    return unless user_signed_in?
+  
+    if current_user.teacher? && current_user.subjects.blank?
+      flash[:alert] = "Account created! Wait for admin to assign you a subject!"
+      redirect_to waiting_room_path and return
     end
   end
 

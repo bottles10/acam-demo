@@ -1,0 +1,13 @@
+<div class="flex flex-col items-center justify-center text-center">
+  <div class="mt-12 max-w-lg bg-white shadow-2xl rounded-2xl p-8">
+    <h1 class="text-3xl font-bold text-gray-800 mb-4">🚀 Almost There!</h1>
+    <p class="text-lg text-gray-600 mb-6">Your account has been created, but you need an admin to assign you a subject before you can proceed.</p>
+    
+    <div class="flex items-center justify-center mb-6">
+      <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-500 border-solid"></div>
+    </div>
+
+    <p class="text-gray-500 mb-4">Sit tight! and check back later when assigned a subject, you shouldn't see this page anymore <span class="text-2xl">😁</span></p>
+    <%= link_to "Log Out", destroy_user_session_path, data: {turbo_method: :delete}, class: "py-2 px-6 bg-red-600 hover:bg-red-500 transform inline-block hover:scale-105 text-red-100 rounded-lg transition-all duration-500"%>
+  </div>
+</div>
