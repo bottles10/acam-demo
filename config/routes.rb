@@ -3,6 +3,8 @@ Rails.application.routes.draw do
     scope module: 'schools' do
       root 'dashboard#index', as: :school_root
       get 'waiting_room', to: 'dashboard#waiting_room', as: :waiting_room
+      get 'teachers', to: 'dashboard#teachers', as: :teachers
+      patch 'teachers/:id/update_role', to: 'dashboard#update_role', as: :update_role
     end
     devise_for :users
     resources :students do

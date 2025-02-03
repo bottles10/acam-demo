@@ -2,10 +2,24 @@ module Schools
   class DashboardController < ApplicationController
     # before_action :require_school
     before_action :authenticate_user!
+    before_action :only_admin_authorized, only: %i[ update_role ]
 
   def waiting_room
     if current_user.admin? || !current_user.subjects.blank?
       redirect_to students_path, alert: "You are not part of subject assign waiting list!"
+    end
+  end
+
+  def teachers
+    @teachers = @current_school.users.all_teachers
+  end
+
+  def update_role
+    @teacher = @current_school.users.all_teachers.find(params.expect(:id))
+    if @teacher.update(role: params[:role])
+      redirect_to teachers_path, notice: "Role updated successfully."
+    else
+      redirect_to teachers_path, alert: "Failed to update role."
     end
   end
 
