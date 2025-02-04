@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_03_140741) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_04_193304) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -66,6 +66,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_03_140741) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "school_id", null: false
+    t.integer "total_subject"
     t.index ["school_id"], name: "index_cutoffs_on_school_id"
   end
 

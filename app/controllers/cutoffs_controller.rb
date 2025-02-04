@@ -67,6 +67,6 @@ class CutoffsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def cutoff_params
-      params.expect(cutoff: [ :current_basic, :class_percentage, :exam_percentage ])
+      params.expect(cutoff: [ :current_basic, :class_percentage, :exam_percentage, :total_subject ])
     end
 end

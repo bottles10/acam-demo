@@ -30,7 +30,8 @@ class Student < ApplicationRecord
     cutoff = Cutoff.find_by(current_basic: self.current_basic)
     {
       class_cutoff_percentage: cutoff&.class_percentage || 0,
-      exam_cutoff_percentage: cutoff&.exam_percentage || 0
+      exam_cutoff_percentage: cutoff&.exam_percentage || 0,
+			total_subject: cutoff&.total_subject || 0
     }
   end
 end

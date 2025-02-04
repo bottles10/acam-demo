@@ -85,7 +85,7 @@
       <tr>
         <td class="font-bold border border-gray-400 px-4 py-2 text-center text-gray-800">Average</td>
         <td class="border border-gray-400 px-4 py-2 text-center text-gray-800">
-          <%= @reports.any? ? (@reports.sum(:total).to_f / @reports.count).ceil : 0 %>
+          <%= @reports.any? ? (@reports.sum(:total) / @student.cutoff_percentage[:total_subject]).ceil : 0 %>
         </td>
       </tr>
     </tfoot>
