@@ -31,7 +31,7 @@
 
     <div>
       <p class="font-medium text-purple-800"><%= current_term(@student, @semester) %></p>
-      <p><span class="font-medium">Next term Begins:</span> <%= "date" %></p>
+      <p><span class="font-medium">Next term Begins:</span> <%= @new_assessment.next_term.strftime("%B %e, %Y") if @new_assessment.persisted? %></p>
       <p><span class="font-medium text-green-500">Promoted To:</span> <%= @new_assessment.next_basic_level&.titleize if @new_assessment.persisted? %></p>
     </div>
   </div>

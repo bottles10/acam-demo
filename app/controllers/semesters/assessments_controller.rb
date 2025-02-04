@@ -46,7 +46,7 @@ module Semesters
   
     def assessment_params
       params.expect(assessment: [ :attendance_present, :attendance_total, :attitude, 
-                                  :conduct, :interest, :class_teacher_remarks, :form_master, :next_basic_level ])
+                                  :conduct, :interest, :class_teacher_remarks, :form_master, :next_basic_level, :next_term ])
     end
   end
 end

@@ -4,6 +4,7 @@ class Assessment < ApplicationRecord
 
   validates :attendance_present, :attendance_total, presence: true, numericality: { only_integer: true, allow_nil: true }
   validates :attitude, :conduct, :interest, presence: true, length: { maximum: 40 }
+  validates :next_term, presence: true
   validates :class_teacher_remarks, presence: true,  length: { maximum: 40 }
   validates :semester_id, uniqueness: { scope: [ :student_id ], message: "for this student already have assessment record."}
 
