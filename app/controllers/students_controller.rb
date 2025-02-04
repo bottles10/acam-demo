@@ -5,9 +5,9 @@ class StudentsController < ApplicationController
 
 	def index
 		if params[:current_basic].present?
-			@students = @current_school.students.where(current_basic: params[:current_basic])
+			@pagy, @students = pagy(@current_school.students.where(current_basic: params[:current_basic]), limit: 10)
 		else
-			@students = @current_school.students
+			@pagy, @students = pagy(@current_school.students, limit: 10)
 		end
 	end
 

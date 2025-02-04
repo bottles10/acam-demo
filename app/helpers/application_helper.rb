@@ -1,4 +1,7 @@
 module ApplicationHelper
+  include Pagy::Frontend
+
+  
   def current_term(student, semester)
     return unless semester.present?
 

@@ -11,7 +11,7 @@ module Schools
   end
 
   def teachers
-    @teachers = @current_school.users.all_teachers
+   @pagy, @teachers = pagy(@current_school.users.all_teachers, limit: 10)
   end
 
   def update_role
