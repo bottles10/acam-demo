@@ -17,6 +17,8 @@ class ReportsController < ApplicationController
     format.pdf {
       pdf = render_pdf(
         pdf_options: {
+                        scale: 1,
+                        paper_height: 11.7,
                         margin_top: 0.02
                     }
       )

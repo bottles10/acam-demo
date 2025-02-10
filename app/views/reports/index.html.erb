@@ -11,9 +11,9 @@
   <div class="flex items-center justify-center space-x-5">
     <div class="w-20 h-20 bg-gray-200 rounded-full text-center"><%= apply_logo(@current_school, 80) %></div>
     <div class="">
-      <P class="text-3xl font-bold"><%= @current_school.name %></P>
-      <h2 class="text-xl font-bold text-center"><%= @current_school.motto %></h2>
-      <div class="flex item-center justify-center space-x-3">
+      <P class="text-2xl font-bold"><%= @current_school.name %></P>
+      <h2 class="text-lg font-bold"><%= @current_school.motto %></h2>
+      <div class="text-sm flex item-center justify-center space-x-3">
         <p><span class="font-medium">Phone number: </span><%= @current_school.phone_number %></p>
         <p><span class="font-medium">Email: </span><%= @current_school.email %></p>
         <p><span class="font-medium">Box Address: </span><%= @current_school.box_address %></p>
@@ -22,7 +22,7 @@
   </div>
   <hr class="my-4">
 
-  <div class="mb-4 flex items-center justify-between">
+  <div class="mb-4 text-sm flex items-center justify-between">
     <div>
       <p><span class="font-medium">Name of student:</span> <%= @student.fullname %></p>
       <p><span class="font-medium">Student ID:</span> <%= "0000" %></p>
@@ -48,25 +48,25 @@
     <table class="table-auto w-full bg-white shadow-md rounded-lg">
       <thead>
         <tr class="text-sm bg-gray-500 text-white">
-          <th class="px-4 py-2">Subject</th>
-          <th class="px-4 py-2">Class Score (<%= @student.cutoff_percentage[:class_cutoff_percentage] %>%)</th>
-          <th class="px-4 py-2">Exam Score (<%= @student.cutoff_percentage[:exam_cutoff_percentage] %>%)</th>
-          <th class="px-4 py-2">Total (100%)</th>
-          <th class="px-4 py-2">Grade</th>
-          <th class="px-4 py-2">Remarks</th>
+          <th class="px-4">Subject</th>
+          <th class="px-4">Class Score (<%= @student.cutoff_percentage[:class_cutoff_percentage] %>%)</th>
+          <th class="px-4">Exam Score (<%= @student.cutoff_percentage[:exam_cutoff_percentage] %>%)</th>
+          <th class="px-4">Total (100%)</th>
+          <th class="px-4">Grade</th>
+          <th class="px-4">Remarks</th>
           <th class="no-print bg-red-600 px-4 py-2">Actions</th>
           
         </tr>
       </thead>
       <tbody>
         <% @reports.each do |report| %>
-          <tr class="even:bg-gray-200 hover:bg-gray-100">
-            <td class="border px-4 py-2 text-center text-gray-800"><%= report.subject.subject_name %></td>
-            <td class="border px-4 py-2 text-center text-gray-600"><%= report.class_scores %></td>
-            <td class="border px-4 py-2 text-center text-gray-600"><%= report.exam_score.to_i %></td>
-            <td class="border px-4 py-2 text-center text-gray-600"><%= report.total.to_i %></td>
-            <td class="border px-4 py-2 text-center text-gray-600"><%= report.grade %></td>
-            <td class="border px-4 py-2 text-center text-gray-600"><%= report.remarks %></td>
+          <tr class="text-sm even:bg-gray-200 hover:bg-gray-100">
+            <td class="border px-4 text-center text-gray-800"><%= report.subject.subject_name %></td>
+            <td class="border px-4 text-center text-gray-600"><%= report.class_scores %></td>
+            <td class="border px-4 text-center text-gray-600"><%= report.exam_score.to_i %></td>
+            <td class="border px-4 text-center text-gray-600"><%= report.total.to_i %></td>
+            <td class="border px-4 text-center text-gray-600"><%= report.grade %></td>
+            <td class="border px-4 text-center text-gray-600"><%= report.remarks %></td>
             <td class="no-print flex items-center justify-between border px-4 py-2 text-center">
               <a href="<%= edit_student_report_path(@student, report) %>" class="inline-block text-blue-500 hover:text-blue-700 font-medium">Edit</a> |
               <%= button_to 'Destroy', student_report_path(@student, report), method: :delete, data: { turbo_confirm: 'Are you sure?' }, class: 'inline-block text-red-500 hover:text-red-700 font-medium' %>
@@ -74,17 +74,17 @@
           </tr>
         <% end %>
       </tbody>
-      <tfoot>
+      <tfoot class="text-sm">
       <tr>
-        <td colspan="7" class="border border-gray-400 px-4 py-2 text-center text-gray-800"></td>
+        <td colspan="7" class="border border-gray-400 px-4 text-center text-gray-800"></td>
       </tr>
       <tr>
-        <td class="font-bold border border-gray-400 px-4 py-2 text-center text-gray-800">Grand Total</td>
-        <td class="border border-gray-400 px-4 py-2 text-center text-gray-800"><%= @reports.sum(:total).ceil %></td>
+        <td colspan="2" class="font-bold border border-gray-400 px-4 text-center text-gray-800">Grand Total</td>
+        <td class="font-bold border border-gray-400 px-4 text-center text-gray-800"><%= @reports.sum(:total).ceil %></td>
       </tr>
       <tr>
-        <td class="font-bold border border-gray-400 px-4 py-2 text-center text-gray-800">Average</td>
-        <td class="border border-gray-400 px-4 py-2 text-center text-gray-800">
+        <td colspan="2" class="font-bold border border-gray-400 px-4 text-center text-gray-800">Average</td>
+        <td class="font-bold border border-gray-400 px-4 text-center text-gray-800">
           <%= @reports.any? ? (@reports.sum(:total) / @student.cutoff_percentage[:total_subject]).ceil : 0 %>
         </td>
       </tr>
@@ -94,7 +94,7 @@
 
   <hr class="my-4">
   
-	<div class="my-12">
+	<div class="my-4 text-sm">
 	  <% if @new_assessment.persisted? %>
     	<p clas="font-medium"> Attendance: <span class="text-sm font-normal text-purple-800 underline underline-offset-2 decoration-dashed"><%= @new_assessment.attendance_present %></span> Out Of <span class="text-sm font-normal text-purple-800 underline underline-offset-2 decoration-dashed"><%= @new_assessment.attendance_total %></span></p>
       <p clas="font-medium"> Attitude:	<span class="text-sm font-normal text-purple-800 underline underline-offset-2 decoration-dashed"><%= @new_assessment.attitude %></p>
@@ -125,7 +125,7 @@
 
   <!-- Biling section -->
 
-  <div class="mb-2 py-2 border-2 text-center font-bold">
+  <div class="mb-2 py-2 text-sm border-2 text-center font-bold">
     STUDENT'S BILL FOR NEXT ACADEMIC TERM
   </div>
 
@@ -134,18 +134,18 @@
 
   <table class="table-auto w-full bg-white shadow-md rounded-lg">
     <thead>
-      <tr class="text-sm bg-gray-500 text-white">
-        <th class="px-4 py-2">Title</th>
-        <th class="px-4 py-2">Amount</th>
-        <th class="no-print w-1/5 bg-red-600 px-4 py-2">Actions</th>
+      <tr class="bg-gray-500 text-white">
+        <th class="px-4">Title</th>
+        <th class="px-4">Amount</th>
+        <th class="no-print w-1/5 bg-red-600 px-4">Actions</th>
       </tr>
     </thead>
     <tbody>
       <% @billings.each do |billing| %>
-        <tr class="even:bg-gray-200 hover:bg-gray-100">
-          <td class="border px-4 py-2 text-center text-gray-800"><%= billing.title %></td>
-          <td class="border px-4 py-2 text-center text-gray-800"><%= number_with_precision(billing.amount, precision: 2) %></td>      
-          <td class="no-print flex items-center justify-between border px-4 py-2 text-center">
+        <tr class="text-sm even:bg-gray-200 hover:bg-gray-100">
+          <td class="border px-4 text-center text-gray-800"><%= billing.title %></td>
+          <td class="border px-4 text-center text-gray-800"><%= number_with_precision(billing.amount, precision: 2) %></td>      
+          <td class="no-print flex items-center justify-between border px-4 text-center">
               <a href="<%= edit_semester_billing_path(@semester, billing) %>" class="inline-block text-blue-500 hover:text-blue-700 font-medium">Edit</a> |
               <%= button_to 'Destroy', semester_billing_path(@semester, billing), method: :delete, data: { turbo_confirm: 'Are you sure?' }, class: 'inline-block text-red-500 hover:text-red-700 font-medium' %>
           </td>
@@ -154,11 +154,11 @@
     </tbody>
     <tfoot>
       <tr>
-        <td colspan="7" class="border border-gray-400 px-4 py-2 text-center text-gray-800"></td>
+        <td colspan="7" class="border border-gray-400 px-4 text-center text-gray-800"></td>
       </tr>
       <tr>
-        <td class="font-bold border border-gray-400 px-4 py-2 text-center text-gray-800">Bill Total</td>
-        <td class="font-bold border border-gray-400 px-4 py-2 text-center text-gray-800"><%= number_with_precision(@billings.sum(:amount), precision: 2) %></td>
+        <td class="font-bold border border-gray-400 px-4 text-center text-gray-800">Bill Total</td>
+        <td class="font-bold border border-gray-400 px-4 text-center text-gray-800"><%= number_with_precision(@billings.sum(:amount), precision: 2) %></td>
       </tr>
     </tfoot>
   </table>
