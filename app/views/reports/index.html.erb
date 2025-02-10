@@ -113,7 +113,6 @@
 		<% end %>
 	</div>
 
-  <hr class="my-4">
 
   <div class="no-print overflow-x-auto">
     <% unless @new_assessment.persisted? %>
@@ -121,12 +120,14 @@
         <h3 class="text-3xl font-semibold text-center">Assessment</h3>
         <%= render partial: "semesters/assessments/form", locals: { student: @student, assessment: @new_assessment, semester: @semester } %>
       </div>
-
-      <hr class="my-4">
     <% end %>
   </div>
 
   <!-- Biling section -->
+
+  <div class="mb-2 py-2 border-2 text-center font-bold">
+    STUDENT'S BILL FOR NEXT ACADEMIC TERM
+  </div>
 
   <%= link_to "New Billing", new_semester_billing_path(@semester, student_id: @student.id), class: "mb-4 no-print btn-primary hover:bg-blue-500 hover:scale-105 transition-all duration-300" %>
 
@@ -156,7 +157,7 @@
         <td colspan="7" class="border border-gray-400 px-4 py-2 text-center text-gray-800"></td>
       </tr>
       <tr>
-        <td class="font-bold border border-gray-400 px-4 py-2 text-center text-gray-800">Total</td>
+        <td class="font-bold border border-gray-400 px-4 py-2 text-center text-gray-800">Bill Total</td>
         <td class="font-bold border border-gray-400 px-4 py-2 text-center text-gray-800"><%= number_with_precision(@billings.sum(:amount), precision: 2) %></td>
       </tr>
     </tfoot>
