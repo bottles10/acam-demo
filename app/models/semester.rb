@@ -2,6 +2,7 @@ class Semester < ApplicationRecord
 	belongs_to :school, default: -> { Current.school }
   has_many :reports, dependent: :destroy
 	has_many :assessments, dependent: :destroy
+	has_many :billings, dependent: :destroy
 
   validates :year, presence: true
   validates :term, presence: true, inclusion: { in: [1, 2, 3, 4] }

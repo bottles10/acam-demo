@@ -8,6 +8,7 @@ class ReportsController < ApplicationController
     @semester = params[:semester_id].present? ? @current_school.semesters.find(params[:semester_id]) : @current_school.semesters.order(year: :desc, term: :desc).first
     @reports = @semester ? @student.reports.by_semester(@semester.id).includes(:subject) : @student.reports.includes(:subject)
     @new_assessment = @semester.assessments.find_or_initialize_by(student: @student) || @semester.assessments.build(student: @student)
+    @billings = @student.billings.by_semester(@semester.id).includes(:student)
     
     @semester_id = @semester.id
     

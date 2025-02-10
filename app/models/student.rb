@@ -3,6 +3,7 @@ class Student < ApplicationRecord
 	has_many :reports
 	has_many :subjects, through: :reports
 	has_many :assessments
+	has_many :billings
 	
   validates :first_name, presence: true
 	validates :last_name, presence: true

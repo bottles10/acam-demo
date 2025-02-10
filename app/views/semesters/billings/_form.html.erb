@@ -1,0 +1,23 @@
+<%= form_with(model: [semester, billing]) do |form| %>
+  <%= render partial: "layouts/shared/error_explanation", locals: { model_name: billing } %>
+
+  <%= form.hidden_field :student_id, value: student.id %>
+  <%= form.hidden_field :semester_id, value: semester.id %>
+
+  <div class="space-y-2">
+    <div>
+      <%= form.label :title %>
+      <%= form.text_field :title, class: "form-control focus:border-blue-500" %>
+    </div>
+
+    <div>
+      <%= form.label :amount %>
+      <%= form.number_field :amount, class: "form-control focus-border-blue-500" %>
+    </div>
+
+    <div>
+      <%= form.submit "Submit assessment", class: "btn-primary" %>
+    </div>
+  </div>
+<% end %>
+  

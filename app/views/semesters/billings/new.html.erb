@@ -1,0 +1,8 @@
+<h1 class="mb-8 text-4xl text-center font-bold">New Billing</h1>
+<div class="flex items-center justify-center">
+  <div>
+      <%= render partial: 'form', locals: { semester: @semester, student: @student, billing: @billing } %>
+      
+      <%= link_to "&larr; Cancel".html_safe, student_reports_path(@student), class: "mt-4 btn-cancel" %>
+  </div>
+</div>

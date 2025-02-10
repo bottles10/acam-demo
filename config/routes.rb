@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     end
     resources :semesters, except: %i[ edit update ] do
       resources :assessments, only: %i[ new create destroy ], module: :semesters
+      resources :billings, module: :semesters
     end
     resources :subjects
     resources :cutoffs
