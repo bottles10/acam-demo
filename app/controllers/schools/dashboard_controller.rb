@@ -27,7 +27,7 @@ module Schools
     @total_teachers = @current_school.users.all_teachers.count
     @total_students = @current_school.students.count
     @total_subjects = @current_school.subjects.count
-    @current_semester = find_current_semester(@current_school.semesters)
+    @current_semester = Semester.find_current_semester(@current_school) # class method in semester model
     @reports = @current_school.reports.includes(:student, :subject).all.limit(10)
 
     subject_performance
@@ -52,31 +52,6 @@ module Schools
     end
   end
 
-
-  def find_current_semester(semester)  
-    today = Date.today
-    current_year = today.beginning_of_year.strftime("%Y-%m-%d")
-    
-    # Determine the current term based on the month
-    current_term = if today.month <= 6
-                     1
-                   elsif today.month <= 8
-                     2
-                   else
-                     3
-                   end
-  
-    current_semester = semester.find_by(year: current_year, term: current_term)
-  
-    if current_semester
-      year = current_semester.year.year
-      term = current_semester.term
-      "#{year} Term #{term}"
-    else
-      "Add semester"
-    end
-  end
-  
 
     private
 
