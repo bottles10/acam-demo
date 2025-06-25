@@ -5,7 +5,7 @@ class Subject < ApplicationRecord
   has_many :reports
 	has_many :students, through: :reports
 
-  validates :subject_name, presence: true, uniqueness: { case_sensitive: false }
+  validates :subject_name, presence: true, uniqueness: { scope: :school_id, case_sensitive: false }
 
   before_save :normalize_subject_name
 
