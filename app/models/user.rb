@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable
 	
 
 	has_secure_token :ferrum_session_token # used when using the ferrum gem. just keeping it
@@ -20,9 +20,9 @@ class User < ApplicationRecord
 	validates :username, presence: true, 
 						uniqueness: { scope: :school_id, case_sensitive: false }, 
 						length: { minimum: 2 }
-	# validates :email, presence: true,
-    #               uniqueness: { scope: :school_id, case_sensitive: false },
-    #               format: { with:  Devise.email_regexp }
+	validates :email, presence: true,
+                  uniqueness: { scope: :school_id, case_sensitive: false },
+                  format: { with:  Devise.email_regexp }
 	validates :first_name, :last_name, presence: true, length: { minimum: 2 }
 	validates :role, presence: true, allow_nil: false
 
@@ -54,8 +54,8 @@ class User < ApplicationRecord
 	end
 
 	def assign_admin_if_needed
-		if User.count == 1
-			User.first.update(role: :admin)
+		if school.users.count == 1
+			update(role: :admin)
 		end
 	end
 end

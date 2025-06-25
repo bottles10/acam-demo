@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_09_215527) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_25_020317) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -167,9 +167,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_09_215527) do
     t.string "ferrum_session_token"
     t.string "first_name", null: false
     t.string "last_name", null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["ferrum_session_token"], name: "index_users_on_ferrum_session_token", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["school_id", "email"], name: "index_users_on_school_id_and_email", unique: true
     t.index ["school_id"], name: "index_users_on_school_id"
   end
 
