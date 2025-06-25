@@ -1,63 +1,65 @@
-<h2 class="mb-8 text-2xl font-bold text-center">Edit profile</h2>
-
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   
-  <div class="p-4 flex flex-col items-center justify-center space-y-2 shadow-2xl rounded-lg">
-    <%= render "devise/shared/error_messages", resource: resource %>
-   
-    <div class="field">
-      <%= f.label :username, class: "font-medium" %><br />
-      <%= f.text_field :username, autofocus: true, autocomplete: "username", placeholder: "happy24", class: "form-control focus:border-blue-500 rounded" %>
-    </div>
+  <div class="flex items-center justify-center">  
+    <div class="w-2xl p-6 flex flex-col items-center justify-center space-y-4 shadow-2xl rounded-lg">
+      <h2 class="mb-8 text-2xl font-bold text-center">Edit profile</h2>
 
-    <div class="field">
-      <%= f.label :first_name, class: "font-medium" %><br />
-      <%= f.text_field :first_name, autocomplete: "first_name", placeholder: "John", class: "form-control focus:border-blue-500 rounded" %>
-    </div>
+      <%= render "devise/shared/error_messages", resource: resource %>
+    
+      <div class="w-full">
+        <%= f.label :username, class: "font-medium" %><br />
+        <%= f.text_field :username, autofocus: true, autocomplete: "username", placeholder: "happy24", class: "form-control w-full focus:border-blue-500 rounded-sm" %>
+      </div>
 
-    <div class="field">
-      <%= f.label :last_name, class: "font-medium" %><br />
-      <%= f.text_field :last_name, autocomplete: "last_name", placeholder: "Doe", class: "form-control focus:border-blue-500 rounded" %>
-    </div>
+      <div class="w-full">
+        <%= f.label :first_name, class: "font-medium" %><br />
+        <%= f.text_field :first_name, autocomplete: "first_name", placeholder: "John", class: "form-control w-full focus:border-blue-500 rounded-sm" %>
+      </div>
 
-    <div class="field">
-      <%= f.label :email, class: "font-medium" %><br />
-      <%= f.email_field :email, autocomplete: "email", placeholder: "johndoe11@mail.com", class: "form-control focus:border-blue-500 rounded" %>
-    </div>
+      <div class="w-full">
+        <%= f.label :last_name, class: "font-medium" %><br />
+        <%= f.text_field :last_name, autocomplete: "last_name", placeholder: "Doe", class: "form-control w-full focus:border-blue-500 rounded-sm" %>
+      </div>
 
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-    <% end %>
+      <div class="w-full">
+        <%= f.label :email, class: "font-medium" %><br />
+        <%= f.email_field :email, autocomplete: "email", placeholder: "johndoe11@mail.com", class: "form-control w-full focus:border-blue-500 rounded-sm" %>
+      </div>
 
-    <div class="field">
-      <%= f.label :password, class: "font-medium" %> <br>
-      <i class="text-sm">(leave blank if you don't want to change it)</i><br />
-      <%= f.password_field :password, autocomplete: "new-password", class: "form-control focus:border-blue-500 rounded" %>
-      <% if @minimum_password_length %>
-        <br />
-        <em><%= @minimum_password_length %> characters minimum</em>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
       <% end %>
-    </div>
 
-    <div class="field">
-      <%= f.label :password_confirmation, class: "font-medium" %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control focus:border-blue-500 rounded" %>
-    </div>
+      <div class="w-full">
+        <%= f.label :password, class: "font-medium" %> <br>
+        <i class="text-sm">(leave blank if you don't want to change it)</i><br />
+        <%= f.password_field :password, autocomplete: "new-password", class: "form-control w-full focus:border-blue-500 rounded-sm" %>
+        <% if @minimum_password_length %>
+          <br />
+          <em><%= @minimum_password_length %> characters minimum</em>
+        <% end %>
+      </div>
 
-    <div class="field">
-      <%= f.label :current_password, class: "font-medium" %> <br>
-      <i class="text-sm">(current password to confirm your changes)</i><br />
-      <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control focus:border-blue-500 rounded" %>
-    </div>
+      <div class="w-full">
+        <%= f.label :password_confirmation, class: "font-medium" %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control w-full focus:border-blue-500 rounded-sm" %>
+      </div>
 
-    <div class="actions">
-      <%= f.submit "Update", class: "btn-primary hover:bg-blue-500 transition duration-300" %>
+      <div class="w-full">
+        <%= f.label :current_password, class: "font-medium" %> <br>
+        <i class="text-sm">(current password to confirm your changes)</i><br />
+        <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control w-full focus:border-blue-500 rounded-sm" %>
+      </div>
+
+      <div class="w-full mt-6">
+        <%= f.submit "Update", class: "btn-primary w-full hover:bg-blue-500 transition duration-300" %>
+      </div>
+      <h3>Cancel my account</h3>
+      
+      <div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
+      
+      <%= link_to "&larr; Back".html_safe, :back, class: "btn-cancel" %>
     </div>
-    <h3>Cancel my account</h3>
-    
-    <div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-    
-    <%= link_to "&larr; Back".html_safe, :back, class: "btn-cancel" %>
   </div>
 <% end %>
 

@@ -1,29 +1,36 @@
-<h2 class="text-2xl font-bold text-center">Log in</h2>
-
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    
-  <div class="p-4 flex flex-col items-center justify-center space-y-2 shadow-2xl rounded-lg">
-    <div class="field">
-      <%= f.label :username, class: "font-medium" %><br />
-      <%= f.text_field :username, autofocus: true, autocomplete: "username", class: "form-control focus:border-blue-500 rounded" %>
-    </div>
+  <div class="flex items-center justify-center">
+    <div class="w-2xl p-6 flex flex-col space-y-4 shadow-2xl rounded-lg">
 
-    <div class="field">
-      <%= f.label :password, class: "font-medium" %><br />
-      <%= f.password_field :password, autocomplete: "current-password", class: "form-control focus:border-blue-500 rounded" %>
-    </div>
-
-    <% if devise_mapping.rememberable? %>
-      <div class="flex space-x-2">
-        <%= f.check_box :remember_me %>
-        <%= f.label :remember_me, class: "form-control focus:border-blue-500 rounded" %>
+      <div>
+        <h2 class="text-2xl font-bold text-center">Log in</h2>
+        <p class="font-semibold text-lg text-center">Or<span class="text-blue-600"><%= link_to " sign up for an account", new_user_registration_path %></span></p>
       </div>
-    <% end %>
 
-    <div class="actions">
-      <%= f.submit "Log in", class: "btn-primary hover:bg-blue-500 transition duration-300" %>
+
+      <div class="w-full">
+        <%= f.label :username, class: "font-medium" %><br />
+        <%= f.text_field :username, autofocus: true, autocomplete: "username", class: "form-control w-full focus:border-blue-500 rounded-sm" %>
+      </div>
+
+      <div class="w-full">
+        <%= f.label :password, class: "font-medium" %><br />
+        <%= f.password_field :password, autocomplete: "current-password", class: "form-control w-full focus:border-blue-500 rounded-sm" %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="flex space-x-2">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me, class: "font-medium" %>
+        </div>
+      <% end %>
+
+      <div class="w-full">
+        <%= f.submit "Log in", class: "btn-primary w-full hover:bg-blue-500 transition duration-300" %>
+      </div>
+      <%= link_to "Forgot your password?", new_password_path(resource_name), class: "text-blue-600 font-medium" %><br />
+      <%# render "devise/shared/links" %>
     </div>
-    <%= render "devise/shared/links" %>
   </div>
 <% end %>
 

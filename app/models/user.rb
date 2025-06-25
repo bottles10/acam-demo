@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
 	has_secure_token :ferrum_session_token # used when using the ferrum gem. just keeping it
 
-	belongs_to :school, default: ->{ Current.school }
+	belongs_to :school, default: -> { Current.school }
   has_many :subject_teachers, foreign_key: :teacher_id, dependent: :destroy
   has_many :subjects, through: :subject_teachers
   
@@ -18,8 +18,11 @@ class User < ApplicationRecord
 	after_destroy :assign_admin_if_needed
   validates :school, presence: true
 	validates :username, presence: true, 
-						uniqueness: { case_sensitive: false }, 
+						uniqueness: { scope: :school_id, case_sensitive: false }, 
 						length: { minimum: 2 }
+	# validates :email, presence: true,
+    #               uniqueness: { scope: :school_id, case_sensitive: false },
+    #               format: { with:  Devise.email_regexp }
 	validates :first_name, :last_name, presence: true, length: { minimum: 2 }
 	validates :role, presence: true, allow_nil: false
 
