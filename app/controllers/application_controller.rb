@@ -52,4 +52,12 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [:username, :first_name, :last_name, :email])
     devise_parameter_sanitizer.permit(:sign_in, keys: [:username])
   end
+
+   def after_sign_in_path_for(resource)
+    if resource.admin?
+      school_root_path
+    else
+      students_path
+    end
+  end
 end

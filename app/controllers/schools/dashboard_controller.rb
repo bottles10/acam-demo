@@ -2,7 +2,7 @@ module Schools
   class DashboardController < ApplicationController
     # before_action :require_school
     before_action :authenticate_user!
-    before_action :only_admin_authorized, only: %i[ update_role ]
+    before_action :only_admin_authorized, only: %i[ update_role index ]
 
   def waiting_room
     if current_user.admin? || !current_user.subjects.blank?
