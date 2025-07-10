@@ -6,4 +6,5 @@ class ApplicationRecord < ActiveRecord::Base
   # TODO: make only admin access dashboard.
   # TODO: Finish updating tailwind syntax to version 4
   # TODO: Fix the global email to school id scope uniqueness in db level and user model
+  # TODO: Create executive or  superAdmin page to manage schools, admin, etc
 end
