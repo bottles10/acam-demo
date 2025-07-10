@@ -1,6 +1,6 @@
 class ApplicationRecord < ActiveRecord::Base
   primary_abstract_class
-  # TODO: grading scale class score and exam score percentage sum should always equal 100%
+  # TODO: grading scale class score and exam score percentage sum should always equal 100% (done)
   # TODO: Add head master's signature upload
   # TODO: update school root to students index. (Fixed with devise after_signed_in_for?)
   # TODO: make only admin access dashboard. (done)
