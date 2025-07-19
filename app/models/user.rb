@@ -14,7 +14,7 @@ class User < ApplicationRecord
   before_save :humanize_username
 	before_create :set_default_role
 
-	after_create :assign_admin_if_needed
+	after_commit :assign_admin_if_needed, on: :create
 	after_commit :assign_admin_if_needed, on: :destroy
   validates :school, presence: true
 	validates :username, presence: true, 
@@ -54,10 +54,9 @@ class User < ApplicationRecord
 	end
 
 	def assign_admin_if_needed
-  	return unless school.users.count == 1
-
-  	only_user = school.users.order(:id).limit(1).first
-  	only_user.update(role: :admin) if !only_user.admin? && only_user != self
+            if school.users.reload.count == 1 && !admin?
+               update_column(:role, :admin)
+            end
 	end
 
 end
