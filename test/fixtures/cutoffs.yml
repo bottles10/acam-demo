@@ -2,8 +2,12 @@
 
 one:
   current_basic: 1
-  percentage: 1
+  class_percentage: 40
+  exam_percentage: 60
+  school: one
 
 two:
   current_basic: 1
-  percentage: 1
+  class_percentage: 40
+  exam_percentage: 60
+  school: one

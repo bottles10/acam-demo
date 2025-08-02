@@ -14,8 +14,8 @@ class User < ApplicationRecord
   before_save :humanize_username
 	before_create :set_default_role
 
-	after_commit :assign_admin_if_needed, on: :create
-	after_commit :assign_admin_if_needed, on: :destroy
+	after_create :assign_admin_if_needed
+	after_commit :auto_assign_admin_when_none, on: :destroy
   validates :school, presence: true
 	validates :username, presence: true, 
 						uniqueness: { scope: :school_id, case_sensitive: false }, 
@@ -31,8 +31,9 @@ class User < ApplicationRecord
 	scope :all_teachers, -> { where(role: :teacher) }
 	
 	def self.find_for_authentication(warden_conditions)
-    where(school: Current.school).find_by(username: warden_conditions[:username])
-  end
+ 		username = warden_conditions[:username].to_s.downcase
+  	where(school: Current.school).where("LOWER(username) = ?", username).first  
+	end
 
 	# Friendly url
 	def to_param
@@ -54,9 +55,17 @@ class User < ApplicationRecord
 	end
 
 	def assign_admin_if_needed
-            if school.users.reload.count == 1 && !admin?
-               update_column(:role, :admin)
-            end
+  	update(role: :admin) if school.users.count == 1
+	end
+
+	def auto_assign_admin_when_none
+		remaining_users = school.users
+  	return if remaining_users.empty?
+
+		# If no admin exists, promote one
+		unless remaining_users.exists?(role: :admin)
+			remaining_users.first.update(role: :admin)
+		end
 	end
 
 end

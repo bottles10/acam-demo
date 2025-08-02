@@ -1,7 +1,7 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  class_score: 9.99
+  class_scores: 90
   exam_score: 9.99
   total: 9.99
   grade: MyString
@@ -9,9 +9,10 @@ one:
   student: one
   subject: one
   semester: one
+  school: one
 
 two:
-  class_score: 9.99
+  class_scores: 90
   exam_score: 9.99
   total: 9.99
   grade: MyString
@@ -19,3 +20,4 @@ two:
   student: two
   subject: two
   semester: two
+  school: two

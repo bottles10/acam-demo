@@ -6,4 +6,12 @@ one:
 
 two:
   name: MyString
-  subdomain: MyString
+  subdomain: MySecondString
+
+divine:
+  name: Divine Victory
+  subdomain: divine
+  phone_number: 050123456
+  email: divine@mail.com
+  box_address: "P.O.box 9"
+  motto: motto

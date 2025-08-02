@@ -1,21 +1,27 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  attendace: MyString
+  attendance_present: 20
+  attendance_total: 50
+  next_basic_level: 6
+  next_term: 2025-12-18
   attitude: MyString
   conduct: MyString
   interest: MyString
   class_teacher_remarks: MyString
   form_master: MyString
-  report: one
-  assessment: one
+  semester: one
+  student: one
 
 two:
-  attendace: MyString
+  attendance_present: 30
+  attendance_total: 50
+  next_basic_level: 7
+  next_term: 2025-12-18
   attitude: MyString
   conduct: MyString
   interest: MyString
   class_teacher_remarks: MyString
   form_master: MyString
-  report: two
-  assessment: two
+  semester: two
+  student: two

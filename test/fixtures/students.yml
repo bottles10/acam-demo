@@ -4,10 +4,12 @@ one:
   first_name: MyString
   middle_name: MyString
   last_name: MyString
-  current_basic: MyString
+  current_basic: 6
+  school: one
 
 two:
   first_name: MyString
   middle_name: MyString
   last_name: MyString
-  current_basic: MyString
+  current_basic: 7
+  school: one
