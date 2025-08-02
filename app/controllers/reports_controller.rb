@@ -87,7 +87,7 @@ class ReportsController < ApplicationController
     puts "******** semesters: #{ @current_school.semesters.exists? } ********"
     puts "******** grading scale: #{ !@student.cutoff_percentage[:class_cutoff_percentage].zero? } ********"
     if !@current_school.semesters.exists? 
-      flash[:alert] = "Add semester to continue..."
+      flash[:alert] = "Add academic Term to continue..."
       redirect_to(request.referer) and return
     elsif @student.cutoff_percentage[:class_cutoff_percentage].zero? && @student.cutoff_percentage[:exam_cutoff_percentage].zero?
       flash[:alert] = "You need to add grade scale for student's class!" 

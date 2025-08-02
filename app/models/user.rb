@@ -31,9 +31,10 @@ class User < ApplicationRecord
 	scope :all_teachers, -> { where(role: :teacher) }
 	
 	def self.find_for_authentication(warden_conditions)
- 		username = warden_conditions[:username].to_s.downcase
-  	where(school: Current.school).where("LOWER(username) = ?", username).first  
+  	username = warden_conditions[:username].to_s.downcase
+  	where(school: Current.school).where("LOWER(username) = ?", username).first
 	end
+
 
 	# Friendly url
 	def to_param
