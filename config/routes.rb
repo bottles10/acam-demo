@@ -31,4 +31,11 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   resources :schools, only: [:new, :create]
   root 'schools#new', as: :main_root
+  # ------------------------------------------------
+  # Paystack
+  # ------------------------------------------------
+  resources :payments, only: [:new, :create]
+  get "/payments/callback", to: "payments#callback"
+  get "/payments/success", to: "payments#success"
+  get "/payments/error", to: "payments#error"
 end
